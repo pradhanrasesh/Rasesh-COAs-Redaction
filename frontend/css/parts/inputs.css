@@ -1,0 +1,40 @@
+/* ---------- Form Inputs & Fields ---------- */
+.field-label {
+  margin-top: 8px;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.input-text {
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid var(--border-subtle);
+  background: var(--surface);        /* ⭐ theme-aware */
+  color: var(--text-primary);        /* ⭐ always readable */
+  padding: 6px 10px;
+  font-size: 12px;
+}
+
+/* Color picker logic */
+.color-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+.color-row input[type="color"] {
+  width: 28px;
+  height: 20px;
+  padding: 0;
+  border-radius: 999px;
+  border: 1px solid #1f2937;
+}
+
+/* Utility visibility classes */
+.hidden, .hidden-input {
+  display: none;
+}
+
+.search-row {
+  position: relative;
+}

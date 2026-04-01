@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rasesh COAs PDF Redaction – Document Review</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="/vendor/lucide-offline.js" defer></script>
+  <script type="module" src="../app/layout.js"></script>
+</head>
+<body data-theme="system" data-density="comfortable" data-page="document-review" data-category="document-review">
+  <!-- STUDIO HEADER -->
+  <!-- ===========================
+       RASESH — STUDIO HEADER
+       Full HTML + CSS (self‑contained)
+  =========================== -->
+  <header id="base-header"></header>
+
+  <main class="tools-shell">
+    <div class="tools-shell-inner">
+      <aside class="tools-side-panel">
+        <a href="../index.html" class="training-nav-link"><i data-lucide="arrow-left"></i><span>Back Home</span></a>
+        <div class="tools-kicker">Offline PDF workspace</div>
+        <div class="tools-category-nav" id="toolsCategoryNav"></div>
+        <label class="tools-dropzone" id="toolsDropzone">
+          <input id="toolsPrimaryFile" type="file" accept="application/pdf" />
+          <div class="training-upload-label"><i data-lucide="file-up"></i> Main PDF</div>
+          <div class="tools-copy">Drop or click to choose the PDF you want to process.</div>
+          <div class="tools-filename" id="toolsFilename">No file selected</div>
+        </label>
+        <div id="toolsStatus" class="tools-status">Loading tools...</div>
+      </aside>
+      <section class="tools-main-panel">
+        <div>
+          <div class="tools-kicker" id="toolsKicker"></div>
+          <h1 class="tools-title" id="toolsTitle"></h1>
+          <p class="tools-copy" id="toolsCopy"></p>
+        </div>
+        <section class="tools-card-grid" id="toolsCardGrid"></section>
+        <section class="tools-main-panel" style="padding:18px;">
+          <div class="tools-toolbar">
+            <div>
+              <div class="tools-card-title" id="toolsActionTitle"></div>
+              <div class="tools-card-copy" id="toolsActionCopy"></div>
+            </div>
+            <button id="toolsRunBtn" type="button" class="btn btn-primary">Run Tool</button>
+          </div>
+          <div id="toolsFormWrap"></div>
+        </section>
+        <section>
+          <div class="tools-card-title" style="margin-bottom:10px;">Result</div>
+          <div class="tools-result" id="toolsResult">Run a tool to see JSON output or download status here.</div>
+        </section>
+      </section>
+    </div>
+  </main>
+  <script type="module">
+    import { initPdfToolsPage } from "../app/pdf_tools.js";
+    initPdfToolsPage();
+  </script>
+</body>
+</html>

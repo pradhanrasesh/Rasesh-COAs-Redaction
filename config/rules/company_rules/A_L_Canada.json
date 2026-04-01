@@ -1,0 +1,145 @@
+{
+  "company_id": "A_L_Canada",
+  "display_name": "A & L Canada Laboratories Inc.",
+  "detection": {
+    "match_strings": [
+      "A_L_Canada",
+      "A & L Canada Laboratories Inc."
+    ],
+    "priority": 5
+  },
+  "anchors": [
+    "A_L_Canada",
+    "A & L Canada Laboratories Inc."
+  ],
+  "regex": [],
+  "layout": [
+    {
+      "id": "learned_zone_0_REPORT_NO",
+      "label": "REPORT NO.",
+      "rect": {
+        "x0": 0.06706450804623396,
+        "y0": 0.9488361980185259,
+        "x1": 0.18073316391437833,
+        "y1": 0.9620114285850608
+      },
+      "relative": true,
+      "page_scope": "all",
+      "action": "suggest"
+    },
+    {
+      "id": "learned_zone_1_REPORT_NO",
+      "label": "REPORT NO.",
+      "rect": {
+        "x0": 0.07416879903799298,
+        "y0": 0.0737812844713267,
+        "x1": 0.2361466336500987,
+        "y1": 0.13197188614018918
+      },
+      "relative": true,
+      "page_scope": "all",
+      "action": "suggest"
+    },
+    {
+      "id": "learned_zone_2_ACCOUNT_NUMBER",
+      "label": "ACCOUNT NUMBER",
+      "rect": {
+        "x0": 0.08553566462480741,
+        "y0": 0.9158981216021886,
+        "x1": 0.15781983690927376,
+        "y1": 0.9335235365379015
+      },
+      "relative": true,
+      "page_scope": "all",
+      "action": "suggest"
+    },
+    {
+      "id": "learned_zone_3_CLIENT_NAME",
+      "label": "CLIENT NAME",
+      "rect": {
+        "x0": 0.08827692364041241,
+        "y0": 0.8610013275749598,
+        "x1": 0.3536753885644343,
+        "y1": 0.9060992487882429
+      },
+      "relative": true,
+      "page_scope": "all",
+      "action": "suggest"
+    },
+    {
+      "id": "learned_zone_4_PO",
+      "label": "PO#",
+      "rect": {
+        "x0": 0.14330591222758549,
+        "y0": 0.7299011347589079,
+        "x1": 0.23109905876283138,
+        "y1": 0.7711515012781993
+      },
+      "relative": true,
+      "page_scope": "all",
+      "action": "suggest"
+    }
+  ],
+  "barcode_qr": [],
+  "sensitive_terms": [],
+  "identifiers": [
+    "A_L_Canada",
+    "A & L Canada Laboratories Inc."
+  ],
+  "description": "Imported from Redection-studio training structure",
+  "studio_rule": {
+    "id": "A_L_Canada",
+    "name": "A & L Canada Laboratories Inc.",
+    "patterns": [],
+    "type": "regex",
+    "isActive": true,
+    "sensitiveTerms": [],
+    "learnedCoordinates": [
+      {
+        "pageIndex": 0,
+        "x": 6.706450804623396,
+        "y": 94.88361980185259,
+        "width": 11.366865586814438,
+        "height": 1.3175230566534912,
+        "label": "REPORT NO."
+      },
+      {
+        "pageIndex": 0,
+        "x": 7.416879903799297,
+        "y": 7.378128447132671,
+        "width": 16.197783461210573,
+        "height": 5.819060166886247,
+        "label": "REPORT NO."
+      },
+      {
+        "pageIndex": 0,
+        "x": 8.553566462480742,
+        "y": 91.58981216021887,
+        "width": 7.228417228446634,
+        "height": 1.7625414935712902,
+        "label": "ACCOUNT NUMBER"
+      },
+      {
+        "pageIndex": 0,
+        "x": 8.82769236404124,
+        "y": 86.10013275749598,
+        "width": 26.53984649240219,
+        "height": 4.509792121328305,
+        "label": "CLIENT NAME"
+      },
+      {
+        "pageIndex": 0,
+        "x": 14.33059122275855,
+        "y": 72.9901134758908,
+        "width": 8.779314653524589,
+        "height": 4.125036651929137,
+        "label": "PO#"
+      }
+    ],
+    "identifiers": [
+      "A_L_Canada",
+      "A & L Canada Laboratories Inc."
+    ],
+    "description": "Imported from Redection-studio training structure"
+  }
+}

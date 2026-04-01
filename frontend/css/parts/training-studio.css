@@ -1,0 +1,704 @@
+body[data-page="training"] {
+  display: block;
+}
+
+body[data-page="training"] .training-app-shell {
+  min-height: 100vh;
+  padding: 24px;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(59, 130, 246, 0.12), transparent 28%),
+    radial-gradient(circle at 100% 0%, rgba(34, 211, 238, 0.10), transparent 24%),
+    var(--bg-main);
+}
+
+body[data-page="training"] .training-app-inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.training-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 22px;
+  border-radius: 24px;
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-soft);
+}
+
+.training-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.training-brand-copy {
+  display: flex;
+  flex-direction: column;
+}
+
+.training-brand-title {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.training-brand-subtitle {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.training-nav {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.training-nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  text-decoration: none;
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid transparent;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.training-nav-link.active,
+.training-nav-link:hover {
+  color: var(--text-primary);
+  border-color: var(--border-subtle);
+  background: var(--accent-soft);
+}
+
+.training-studio-grid {
+  display: grid;
+  grid-template-columns: 380px minmax(0, 1fr);
+  gap: 20px;
+  min-height: calc(100vh - 150px);
+}
+
+.training-side-panel,
+.training-main-panel {
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 26px;
+  box-shadow: var(--shadow-soft);
+}
+
+.training-side-panel {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.training-side-panel::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background: radial-gradient(600px 120px at 10% 0%, rgba(59, 130, 246, 0.22), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.18s ease;
+  pointer-events: none;
+}
+
+.training-side-panel:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(15, 23, 42, 0.18);
+  border-color: rgba(59, 130, 246, 0.35);
+}
+
+.training-side-panel:hover::before {
+  opacity: 1;
+}
+
+.training-main-panel {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  min-height: 680px;
+}
+
+.training-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.training-side-title {
+  margin: 0;
+  font-size: 38px;
+  line-height: 0.95;
+  letter-spacing: -0.05em;
+}
+
+.training-side-copy {
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.training-upload-card {
+  border: 1px solid var(--border-subtle);
+  border-radius: 24px;
+  padding: 18px;
+  background: rgba(255, 255, 255, 0.48);
+}
+
+.training-upload-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+  font-weight: 800;
+}
+
+.training-dropzone {
+  position: relative;
+  border-radius: 20px;
+  border: 1px dashed rgba(59, 130, 246, 0.4);
+  background: linear-gradient(180deg, rgba(59, 130, 246, 0.06), rgba(34, 211, 238, 0.05));
+  padding: 28px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.16s ease, border-color 0.16s ease, background 0.16s ease;
+}
+
+.training-dropzone > *:not(.dropzone-input) {
+  pointer-events: none;
+}
+
+.training-dropzone:hover,
+.training-dropzone.dragover {
+  transform: translateY(-1px);
+  border-color: rgba(59, 130, 246, 0.8);
+  background: rgba(59, 130, 246, 0.08);
+}
+
+.training-dropzone i[data-lucide] {
+  width: 44px;
+  height: 44px;
+  color: var(--accent);
+}
+
+.training-drop-main {
+  margin-top: 10px;
+  font-weight: 700;
+}
+
+.training-drop-sub {
+  margin-top: 6px;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.training-file-name {
+  margin-top: 10px;
+  color: var(--text-secondary);
+  font-size: 12px;
+  word-break: break-word;
+}
+
+.training-action-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.training-action-row .btn-studio,
+.training-action-row .btn {
+  flex: 1 1 0;
+}
+
+.training-note {
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.training-panel-title {
+  margin: 0 0 6px;
+  font-size: 24px;
+  letter-spacing: -0.04em;
+}
+
+.training-panel-copy {
+  margin: 0;
+  color: var(--text-secondary);
+}
+
+.training-state {
+  flex: 1;
+  display: none;
+}
+
+.training-state.active {
+  display: flex;
+  flex-direction: column;
+}
+
+.training-empty-state,
+.training-completed-state,
+.training-error-state,
+.training-progress-state {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 16px;
+  color: var(--text-secondary);
+}
+
+.training-progress-ring {
+  width: 136px;
+  height: 136px;
+  position: relative;
+}
+
+.training-progress-ring svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.training-progress-ring-value {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.training-preview-shell {
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr);
+  gap: 18px;
+  flex: 1;
+  min-height: 0;
+}
+
+.training-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.training-summary-card {
+  padding: 16px 18px;
+  border-radius: 20px;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-panel);
+}
+
+.training-summary-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.training-summary-kicker {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+  font-weight: 800;
+}
+
+.training-summary-value {
+  margin-top: 8px;
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.training-preview-grid {
+  display: grid;
+  grid-template-columns: 320px minmax(0, 1fr);
+  gap: 18px;
+  min-height: 0;
+  flex: 1;
+}
+
+.training-suggestion-panel {
+  border: 1px solid var(--border-subtle);
+  border-radius: 24px;
+  background: var(--bg-panel);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.training-list-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.training-suggestion-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow: auto;
+  padding-right: 6px;
+}
+
+.training-suggestion-item {
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  padding: 12px 14px;
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.training-suggestion-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.training-suggestion-origin {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.training-suggestion-remove {
+  border: none;
+  background: transparent;
+  color: #ef4444;
+  font-size: 11px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.training-inline-input,
+.training-inline-textarea {
+  width: 100%;
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  background: var(--surface);
+  color: var(--text-primary);
+  padding: 10px 12px;
+  font: inherit;
+  box-sizing: border-box;
+}
+
+.training-inline-input {
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.training-inline-textarea {
+  resize: vertical;
+  min-height: 72px;
+}
+
+.training-suggestion-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-primary);
+}
+
+.training-suggestion-text {
+  margin-top: 6px;
+  color: var(--text-secondary);
+  line-height: 1.45;
+  font-size: 13px;
+}
+
+.training-suggestion-meta {
+  margin-top: 8px;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.training-viewer-panel {
+  border: 1px solid var(--border-subtle);
+  border-radius: 24px;
+  background: var(--bg-panel);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.training-preview-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.training-preview-toolbar-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.training-mini-action,
+.training-zoom-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border-subtle);
+  background: rgba(255, 255, 255, 0.55);
+  color: var(--text-primary);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.training-mini-action {
+  cursor: pointer;
+}
+
+.training-viewer-frame {
+  flex: 1;
+  min-height: 0;
+  border-radius: 20px;
+  background: rgba(148, 163, 184, 0.12);
+  border: 1px solid var(--border-subtle);
+  overflow: hidden;
+}
+
+.training-viewer-frame #trainingViewerContainer {
+  height: 100%;
+}
+
+.training-info-banner {
+  padding: 14px 16px;
+  border-radius: 18px;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-panel);
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+
+.studio-viewer-split {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 18px;
+  height: 100%;
+  padding: 16px;
+  overflow: auto;
+  box-sizing: border-box;
+}
+
+.training-column {
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow: auto;
+}
+
+.training-column-header {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  padding: 8px 12px;
+  border-radius: 999px;
+  align-self: flex-start;
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid var(--border-subtle);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.training-page-wrapper {
+  position: relative;
+  margin: 0 auto 18px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
+}
+
+.training-pdf-canvas,
+.training-overlay-canvas {
+  display: block;
+}
+
+.training-overlay-canvas {
+  position: absolute;
+  inset: 0;
+}
+
+.training-overlay-canvas.interactive {
+  cursor: crosshair;
+}
+
+.labels-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.label-overlay {
+  position: absolute;
+  pointer-events: auto;
+  border: none;
+  color: #fff;
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.18);
+}
+
+body[data-theme="dark"][data-page="training"] .training-app-shell,
+body[data-theme="system"][data-page="training"] .training-app-shell {
+  background:
+    radial-gradient(circle at 0% 0%, rgba(37, 99, 235, 0.18), transparent 26%),
+    radial-gradient(circle at 100% 0%, rgba(34, 211, 238, 0.12), transparent 22%),
+    linear-gradient(180deg, #071122 0%, #040b18 100%);
+}
+
+body[data-theme="dark"][data-page="training"] .training-topbar,
+body[data-theme="dark"][data-page="training"] .training-side-panel,
+body[data-theme="dark"][data-page="training"] .training-main-panel,
+body[data-theme="dark"][data-page="training"] .training-upload-card,
+body[data-theme="dark"][data-page="training"] .training-summary-card,
+body[data-theme="dark"][data-page="training"] .training-suggestion-panel,
+body[data-theme="dark"][data-page="training"] .training-viewer-panel,
+body[data-theme="dark"][data-page="training"] .training-note,
+body[data-theme="dark"][data-page="training"] .training-suggestion-item,
+body[data-theme="dark"][data-page="training"] .training-nav-link,
+body[data-theme="dark"][data-page="training"] .training-mini-action,
+body[data-theme="dark"][data-page="training"] .training-zoom-chip,
+body[data-theme="dark"][data-page="training"] .training-column-header,
+body[data-theme="dark"][data-page="training"] .training-inline-input,
+body[data-theme="dark"][data-page="training"] .training-inline-textarea {
+  background: rgba(7, 18, 34, 0.82);
+  border-color: rgba(59, 130, 246, 0.16);
+}
+
+body[data-theme="dark"][data-page="training"] .training-dropzone {
+  background: linear-gradient(180deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
+  border-color: rgba(59, 130, 246, 0.26);
+}
+
+body[data-theme="dark"][data-page="training"] .training-viewer-frame {
+  background: rgba(15, 23, 42, 0.72);
+}
+
+@media (prefers-color-scheme: dark) {
+  body[data-theme="system"][data-page="training"] .training-topbar,
+  body[data-theme="system"][data-page="training"] .training-side-panel,
+  body[data-theme="system"][data-page="training"] .training-main-panel,
+  body[data-theme="system"][data-page="training"] .training-upload-card,
+  body[data-theme="system"][data-page="training"] .training-summary-card,
+  body[data-theme="system"][data-page="training"] .training-suggestion-panel,
+  body[data-theme="system"][data-page="training"] .training-viewer-panel,
+  body[data-theme="system"][data-page="training"] .training-note,
+  body[data-theme="system"][data-page="training"] .training-suggestion-item,
+  body[data-theme="system"][data-page="training"] .training-nav-link,
+  body[data-theme="system"][data-page="training"] .training-mini-action,
+  body[data-theme="system"][data-page="training"] .training-zoom-chip,
+  body[data-theme="system"][data-page="training"] .training-column-header,
+  body[data-theme="system"][data-page="training"] .training-inline-input,
+  body[data-theme="system"][data-page="training"] .training-inline-textarea {
+    background: rgba(7, 18, 34, 0.82);
+    border-color: rgba(59, 130, 246, 0.16);
+  }
+
+  body[data-theme="system"][data-page="training"] .training-dropzone {
+    background: linear-gradient(180deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
+    border-color: rgba(59, 130, 246, 0.26);
+  }
+
+  body[data-theme="system"][data-page="training"] .training-viewer-frame {
+    background: rgba(15, 23, 42, 0.72);
+  }
+}
+
+@media (max-width: 1100px) {
+  .training-studio-grid,
+  .training-preview-grid,
+  .training-summary-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  body[data-page="training"] .training-app-shell {
+    padding: 14px;
+  }
+
+  .training-topbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .training-nav {
+    width: 100%;
+  }
+
+  .training-nav-link {
+    flex: 1 1 calc(50% - 8px);
+    justify-content: center;
+  }
+
+  .training-side-panel,
+  .training-main-panel {
+    padding: 18px;
+    border-radius: 22px;
+  }
+
+  .training-side-title {
+    font-size: 30px;
+  }
+}

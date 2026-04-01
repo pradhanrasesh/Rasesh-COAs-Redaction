@@ -1,0 +1,208 @@
+<!-- ===========================
+     RASESH — STUDIO HEADER
+     Full HTML + CSS (self‑contained)
+=========================== -->
+<header class="training-topbar">
+  <div class="training-brand">
+    <button
+      id="btnHome"
+      class="logo-circle"
+      type="button"
+      aria-label="Go to home"
+      data-tooltip="HomeReturn to landing page"
+    >
+      R
+    </button>
+
+    <div class="training-brand-copy">
+      <span class="training-brand-title">Rasesh COAs PDF Redaction</span>
+      <span class="training-brand-subtitle">Auto-detect · Auto-redact · Manual fine‑tune</span>
+    </div>
+  </div>
+
+  <nav class="training-nav">
+    <a class="training-nav-link" data-nav="home" href="../index.html">
+      <i data-lucide="home"></i><span>Home</span>
+    </a>
+
+    <a class="training-nav-link" data-nav="redaction" href="redaction.html">
+      <i data-lucide="file-text"></i><span>Redaction</span>
+    </a>
+
+    <a class="training-nav-link" data-nav="ai-training" href="training.html">
+      <i data-lucide="brain"></i><span>AI Training</span>
+    </a>
+
+    <a class="training-nav-link" data-nav="rule-define" href="rule-define.html">
+      <i data-lucide="scan-search"></i><span>Rule Define</span>
+    </a>
+
+    <a class="training-nav-link" data-nav="pdf-tools" href="pdf-tools.html">
+      <i data-lucide="tool"></i><span>PDF Toolbox</span>
+    </a>
+
+    <a class="training-nav-link" data-nav="settings" href="settings.html">
+      <i data-lucide="settings"></i><span>Settings</span>
+    </a>
+  </nav>
+</header>
+
+<style>
+/* ------------------------------------------------------------
+   STUDIO HEADER BASE
+------------------------------------------------------------ */
+.training-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 22px;
+  border-radius: 24px;
+  background: var(--surface, #fff);
+  border: 1px solid var(--border-subtle, rgba(0,0,0,0.1));
+  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.12);
+  position: relative;
+  overflow: hidden;
+}
+
+/* ------------------------------------------------------------
+   HOME-PAGE SHINE EFFECT (applied globally)
+------------------------------------------------------------ */
+.training-topbar::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background: radial-gradient(600px 120px at 10% 0%, rgba(59,130,246,0.22), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+
+.training-topbar:hover::before {
+  opacity: 1;
+}
+
+/* ------------------------------------------------------------
+   LOGO CIRCLE (with shine + hover wiggle)
+------------------------------------------------------------ */
+.logo-circle {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(59,130,246,0.12);
+  border: 1px solid rgba(59,130,246,0.25);
+  color: var(--accent, #2563eb);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 18px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.18s ease;
+}
+
+.logo-circle:hover {
+  transform: translateY(-2px) scale(1.05);
+}
+
+.logo-circle:hover svg {
+  transform: rotate(-10deg) scale(1.1);
+}
+
+/* Shine */
+.logo-circle::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background: radial-gradient(600px 120px at 10% 0%, rgba(59,130,246,0.22), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.18s ease;
+}
+
+.logo-circle:hover::before {
+  opacity: 1;
+}
+
+/* ------------------------------------------------------------
+   BRAND TEXT
+------------------------------------------------------------ */
+.training-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.training-brand-title {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  font-size: 18px;
+}
+
+.training-brand-subtitle {
+  font-size: 12px;
+  color: var(--text-muted, #6b7280);
+}
+
+/* ------------------------------------------------------------
+   NAVIGATION (Studio style + Home animations)
+------------------------------------------------------------ */
+.training-nav {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.training-nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  text-decoration: none;
+  color: var(--text-secondary, #4b5563);
+  background: rgba(255,255,255,0.5);
+  border: 1px solid transparent;
+  font-size: 12px;
+  font-weight: 700;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.22s ease;
+}
+
+/* Shine effect */
+.training-nav-link::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background: radial-gradient(600px 120px at 10% 0%, rgba(59,130,246,0.22), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.18s ease;
+}
+
+.training-nav-link:hover::before {
+  opacity: 1;
+}
+
+/* Hover animation */
+.training-nav-link:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent, #2563eb);
+  background: var(--accent-soft, rgba(59,130,246,0.12));
+  color: var(--accent, #2563eb);
+}
+
+/* Icon wiggle */
+.training-nav-link:hover i svg {
+  transform: rotate(-10deg) scale(1.1);
+  transition: transform 0.22s ease;
+}
+
+/* Active state */
+.training-nav-link.active {
+  border-color: var(--accent, #2563eb);
+  background: var(--accent-soft, rgba(59,130,246,0.12));
+  color: var(--accent, #2563eb);
+}
+</style>

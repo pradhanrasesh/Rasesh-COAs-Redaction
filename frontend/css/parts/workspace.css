@@ -1,0 +1,35 @@
+/* ------------------------------------------------------------
+   WORKSPACE LAYOUT — 4‑COLUMN (SIDEBAR | THUMBNAILS | VIEWER | TOOLS)
+   ------------------------------------------------------------ */
+
+.workspace {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 250px 240px 1fr 200px; /* sidebar | thumbnails | viewer | tools */
+  gap: 16px;
+  min-height: 0;
+}
+
+/* Hide thumbnail sidebar on non-redaction pages */
+body:not([data-page="redaction"]) .thumbnail-sidebar {
+  display: none;
+}
+
+body:not([data-page="redaction"]) .workspace {
+  grid-template-columns: 250px 1fr 200px;
+}
+
+/* SETTINGS PAGE — 1‑COLUMN (no sidebar) */
+body[data-page="settings"] .workspace {
+  grid-template-columns: 1fr !important;
+}
+
+body[data-page="settings"] .sidebar {
+  display: none !important;
+}
+
+body[data-page="settings"] .right-panel {
+  display: none !important;
+}
+
+/* ❗ NO RESPONSIVE RULES HERE */

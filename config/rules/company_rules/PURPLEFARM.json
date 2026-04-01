@@ -1,0 +1,45 @@
+{
+  "company_id": "PURPLEFARM",
+  "display_name": "PurpleFarm Labs",
+
+  "detection": {
+    "match_strings": [
+      "PurpleFarm",
+      "Purple Farm"
+    ],
+    "priority": 8
+  },
+
+  "anchors": [
+    "Farm:",
+    "Sample:",
+    "Field ID",
+    "PurpleFarm"
+  ],
+
+  "regex": [
+    {
+      "id": "pf_sample_id",
+      "pattern": "PF[-\\s]?[0-9]{3,10}",
+      "action": "suggest"
+    }
+  ],
+
+  "layout": [
+    {
+      "id": "pf_top_right",
+      "rect": { "x0": 0.70, "y0": 0.82, "x1": 0.98, "y1": 0.96 },
+      "relative": true,
+      "action": "suggest"
+    }
+  ],
+
+  "barcode_qr": [
+    {
+      "id": "pf_barcode",
+      "rect": { "x0": 0.70, "y0": 0.70, "x1": 0.90, "y1": 0.78 },
+      "relative": true,
+      "action": "suggest"
+    }
+  ]
+}

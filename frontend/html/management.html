@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rasesh COAs PDF Redaction – Saved Trained Data</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/alert.css">
+</head>
+<body class="theme-light">
+    <div id="appRoot">
+        <header id="base-header"></header>
+        <div class="main-layout">
+            <aside id="base-sidebar" class="sidebar-container"></aside>
+            <main class="content-area-studio">
+                <div class="studio-container py-8">
+                    <div class="studio-section-header mb-8">
+                        <h1 class="studio-title-small">Secure Vault</h1>
+                        <p class="studio-subtitle-small">Enterprise rules and company-specific training patterns.</p>
+                    </div>
+
+                    <div class="studio-vault-layout">
+                        <div class="studio-vault-sidebar">
+                            <h2 class="studio-title-mini mb-4 flex items-center gap-2">
+                                <i data-lucide="building-2"></i>
+                                Entities
+                            </h2>
+                            <div id="companyList" class="studio-entity-list">
+                                <!-- Loaded via RuleManagement.js -->
+                                <div class="studio-loader">Loading entities...</div>
+                            </div>
+                        </div>
+
+                        <div class="studio-vault-main">
+                            <div id="ruleDetailsHeader" class="studio-vault-header">
+                                <div class="studio-vault-title-group">
+                                    <h2 id="selectedCompanyName" class="studio-title-mini">Select an Entity</h2>
+                                    <p id="selectedCompanyMeta" class="studio-subtitle-mini"></p>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <input id="templateImportInput" type="file" accept="application/json" hidden />
+                                    <button id="btnImportTemplates" class="btn-studio btn-studio-outline small">
+                                        <i data-lucide="upload-cloud"></i> Import
+                                    </button>
+                                    <button id="btnExportTemplates" class="btn-studio btn-studio-outline small">
+                                        <i data-lucide="download"></i> Export
+                                    </button>
+                                </div>
+                                <div id="companyActions" class="hidden">
+                                    <button id="btnDeleteRules" class="btn-studio btn-studio-danger small">
+                                        <i data-lucide="trash-2"></i> Wipe Data
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div id="ruleContent" class="studio-vault-content">
+                                <div class="studio-empty-state">
+                                    <i data-lucide="shield" class="studio-empty-icon"></i>
+                                    <p>Select an entity to reveal its secured redaction patterns.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+        <footer id="base-footer"></footer>
+    </div>
+
+    <!-- Scripts -->
+  <script src="/vendor/lucide-offline.js"></script>
+    <script type="module" src="../app/layout.js"></script>
+    <script type="module" src="../app/RuleManagement.js"></script>
+</body>
+</html>

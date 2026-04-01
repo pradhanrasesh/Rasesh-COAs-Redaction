@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rasesh COAs PDF Redaction – Rule Define Studio</title>
+
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="/vendor/lucide-offline.js" defer></script>
+  <script src="../pdfjs/pdf.js"></script>
+  <script type="module" src="../app/layout.js"></script>
+</head>
+
+<body data-theme="system" data-density="comfortable" data-page="redaction">
+  <div id="alertContainer"></div>
+  <div id="toastContainer" class="toast-container"></div>
+
+  <!-- Header will be loaded by layout.js -->
+  <header id="base-header"></header>
+
+  <!-- ⭐ 4‑COLUMN WORKSPACE (with thumbnail sidebar) -->
+  <div class="workspace">
+
+    <!-- LEFT: Main Sidebar -->
+    <aside class="sidebar">
+      <div id="base-sidebar"></div>
+    </aside>
+
+    <!-- LEFT-CENTER: Thumbnail Sidebar (Stirling Style) -->
+    <aside class="thumbnail-sidebar" id="thumbnailSidebar">
+      <div class="thumbnail-header">
+        <h3 class="thumbnail-title">Pages</h3>
+        <span class="thumbnail-count" id="thumbnailPageCount">0</span>
+      </div>
+      <div class="thumbnail-container" id="thumbnailContainer">
+        <!-- Thumbnails will be generated here -->
+        <div class="thumbnail-placeholder">
+          <i data-lucide="file-image"></i>
+          <p>Upload a PDF to see thumbnails</p>
+        </div>
+      </div>
+      <div class="thumbnail-controls">
+        <button class="btn btn-small btn-ghost" id="btnToggleThumbnails" title="Toggle thumbnails">
+          <i data-lucide="panel-left"></i>
+        </button>
+      </div>
+    </aside>
+
+    <!-- CENTER: PDF Viewer -->
+    <main class="viewer-panel">
+
+      <!-- Viewer Header -->
+      <div class="viewer-header">
+        <div class="zoom-controls">
+          <button id="btnZoomOut" class="btn btn-small"><i data-lucide="zoom-out"></i></button>
+          <span id="zoomInfo">100%</span>
+          <button id="btnZoomIn" class="btn btn-small"><i data-lucide="zoom-in"></i></button>
+        </div>
+
+        <div id="pageInfo">
+          <input id="pageJumpInput" type="number" min="1" step="1" value="1" />
+          <span id="pageTotalText">/ 1</span>
+        </div>
+
+        <div class="viewer-actions">
+          <button id="btnPrevPage" class="btn btn-small"><i data-lucide="chevron-left"></i></button>
+          <button id="btnNextPage" class="btn btn-small"><i data-lucide="chevron-right"></i></button>
+          <button id="searchToggle" class="btn btn-small"><i data-lucide="search"></i></button>
+        </div>
+      </div>
+
+      <!-- Floating Search Bar (unchanged) -->
+      <div id="floatingSearchBar" class="floating-search">
+        <div class="search-inner">
+          <i data-lucide="search"></i>
+          <input id="searchInput" type="text" placeholder="Search..." />
+          <button id="btnSearchPrev" class="btn btn-small"><i data-lucide="chevron-up"></i></button>
+          <button id="btnSearchNext" class="btn btn-small"><i data-lucide="chevron-down"></i></button>
+          <button id="btnSearchRedactAll" class="btn btn-small"><i data-lucide="eraser"></i></button>
+          <button id="btnCloseSearch" class="btn btn-small btn-ghost"><i data-lucide="x"></i></button>
+        </div>
+        <div id="searchSuggestions" class="suggestions hidden"></div>
+      </div>
+
+      <!-- PDF Pages -->
+      <div class="pdf-scroll-container">
+        <div id="pdfPagesColumn" class="pdf-pages-column"></div>
+      </div>
+
+    </main>
+
+    <!-- RIGHT: Tools -->
+    <aside class="right-panel">
+      <div id="base-tools"></div>
+    </aside>
+
+  </div>
+
+  <!-- ⭐ Animated Footer (loaded by layout.js) -->
+  <div id="base-footer"></div>
+
+  <!-- Lucide Icons -->
+  <script src="/vendor/lucide-offline.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (window.lucide) window.lucide.createIcons();
+    });
+  </script>
+
+</body>
+</html>

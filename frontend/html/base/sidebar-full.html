@@ -1,0 +1,96 @@
+<aside class="sidebar sidebar-studio">
+  <div class="sidebar-inner">
+  <div class="sidebar-header">
+    <div class="sidebar-logo">
+      <span class="logo-mark-animated">R</span>
+      <div class="logo-text">
+        <span class="logo-title">Rasesh COAs</span>
+        <span class="logo-subtitle">PDF Redaction</span>
+      </div>
+    </div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <button class="nav-item" data-nav="home" data-tooltip="Home&#10;Tip: Landing page">
+      <i data-lucide="home" class="icon-20"></i>
+      <span class="nav-label">Home</span>
+    </button>
+
+    <button class="nav-item nav-item-active" data-nav="redaction" data-tooltip="Redaction&#10;Tip: Single PDF redaction&#10;Shortcut: T/B/H">
+      <i data-lucide="file-text" class="icon-20"></i>
+      <span class="nav-label">Redact COA</span>
+    </button>
+
+    <button class="nav-item" data-nav="batch-redaction" data-tooltip="Batch Redaction&#10;Tip: Multi-PDF offline redaction">
+      <i data-lucide="layers" class="icon-20"></i>
+      <span class="nav-label">Batch Redaction</span>
+    </button>
+
+    <button class="nav-item" data-nav="ai-training" data-tooltip="AI Training&#10;Tip: Learn patterns locally from PDF pairs">
+      <i data-lucide="brain" class="icon-20"></i>
+      <span class="nav-label">AI Training</span>
+    </button>
+
+    <button class="nav-item" data-nav="rule-define" data-tooltip="Rule Define Studio&#10;Tip: Upload one PDF and manually build company rules.">
+      <i data-lucide="scan-search" class="icon-20"></i>
+      <span class="nav-label">Rule Define Studio</span>
+    </button>
+
+    <button class="nav-item" data-nav="settings" data-tooltip="Settings&#10;Tip: Theme, density, shortcuts, AI sensitivity">
+      <i data-lucide="settings" class="icon-20"></i>
+      <span class="nav-label">Settings</span>
+    </button>
+  </nav>
+
+  <section id="uploadSection" class="sidebar-section upload-compact">
+    <div class="sidebar-section-title">Upload</div>
+
+    <div
+      id="dropZone"
+      class="dropzone"
+      data-tooltip="Upload PDF&#10;Tip: Click or drag & drop a PDF to start.&#10;Shortcut: (none)"
+    >
+      <input id="fileInput" type="file" accept="application/pdf" class="dropzone-input" />
+      <div class="dropzone-inner">
+        <i data-lucide="upload-cloud" class="icon-20 dropzone-icon"></i>
+        <div class="dropzone-text-main">Click to upload or drag & drop</div>
+        <div class="dropzone-text-sub">PDF only · max 50MB</div>
+        <div id="fileName" class="dropzone-filename"></div>
+      </div>
+    </div>
+
+    <div class="panel-actions">
+      <button
+        id="btnRedact"
+        class="btn btn-primary"
+        disabled
+        data-tooltip="Apply manual redactions&#10;Tip: Saves redactions into a new PDF.&#10;Shortcut: (none)"
+      >
+        Apply Manual Redactions
+      </button>
+      <button
+        id="btnClear"
+        class="btn btn-ghost"
+        data-tooltip="Clear&#10;Tip: Removes current redactions and unloads state.&#10;Shortcut: (none)"
+      >
+        Clear
+      </button>
+    </div>
+
+    <div id="statusText" class="status-text"></div>
+  </section>
+
+  <section class="sidebar-footer">
+    <div class="sidebar-section-title">Templates</div>
+    <select id="companySelect"></select>
+    <button
+      id="btnSaveRule"
+      class="btn btn-small btn-primary"
+      data-tooltip="Save selected as rule&#10;Tip: Adds a company-specific detection rule.&#10;Shortcut: (none)"
+    >
+      <i data-lucide="save" class="icon-20"></i>
+      Save Selected as Rule
+    </button>
+  </section>
+  </div>
+</aside>

@@ -1,0 +1,51 @@
+{
+  "company_id": "High_North",
+  "display_name": "High North Laboratories",
+
+  "detection": {
+    "match_strings": [
+      "High North",
+      "High North Laboratories",
+      "HighNorth"
+    ],
+    "priority": 10
+  },
+
+  "anchors": [
+    "High North",
+    "Sample ID",
+    "Analyst",
+    "Method"
+  ],
+
+  "regex": [
+    {
+      "id": "hn_company_name",
+      "pattern": "High\\s*North[^\\n]*",
+      "action": "redact"
+    },
+    {
+      "id": "hn_coa",
+      "pattern": "HN[-\\s]?[0-9]{5,12}",
+      "action": "suggest"
+    }
+  ],
+
+  "layout": [
+    {
+      "id": "hn_left_column",
+      "rect": { "x0": 0.02, "y0": 0.12, "x1": 0.28, "y1": 0.88 },
+      "relative": true,
+      "action": "suggest"
+    }
+  ],
+
+  "barcode_qr": [
+    {
+      "id": "hn_barcode",
+      "rect": { "x0": 0.30, "y0": 0.12, "x1": 0.48, "y1": 0.22 },
+      "relative": true,
+      "action": "suggest"
+    }
+  ]
+}

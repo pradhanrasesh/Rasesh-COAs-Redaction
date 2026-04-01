@@ -1,0 +1,51 @@
+{
+  "company_id": "PATHOGENIA",
+  "display_name": "Pathogenia Laboratories",
+
+  "detection": {
+    "match_strings": [
+      "Pathogenia",
+      "Pathogenia Labs",
+      "Pathogenia Laboratory"
+    ],
+    "priority": 9
+  },
+
+  "anchors": [
+    "Patient ID",
+    "Specimen",
+    "Test Result",
+    "Pathogenia"
+  ],
+
+  "regex": [
+    {
+      "id": "path_patient_id",
+      "pattern": "(PATIENT|PID|Patient ID)[:\\s]*[A-Z0-9\\-]{4,20}",
+      "action": "redact"
+    },
+    {
+      "id": "path_coa",
+      "pattern": "PATH[-\\s]?[A-Z0-9]{4,12}",
+      "action": "suggest"
+    }
+  ],
+
+  "layout": [
+    {
+      "id": "path_right_column",
+      "rect": { "x0": 0.70, "y0": 0.10, "x1": 0.98, "y1": 0.60 },
+      "relative": true,
+      "action": "suggest"
+    }
+  ],
+
+  "barcode_qr": [
+    {
+      "id": "path_barcode",
+      "rect": { "x0": 0.72, "y0": 0.62, "x1": 0.96, "y1": 0.72 },
+      "relative": true,
+      "action": "suggest"
+    }
+  ]
+}

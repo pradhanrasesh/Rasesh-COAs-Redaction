@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rasesh COAs PDF Redaction – Rule Define Studio</title>
+
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="/vendor/lucide-offline.js" defer></script>
+  <script src="../pdfjs/pdf.js"></script>
+  <script type="module" src="../app/layout.js"></script>
+</head>
+
+<body data-theme="system" data-density="comfortable" data-page="rule-define">
+  <div id="alertContainer"></div>
+  <div id="toastContainer" class="toast-container"></div>
+
+  <!-- Header will be loaded by layout.js -->
+  <header id="base-header"></header>
+
+  <main class="training-app-shell">
+    <div class="training-app-inner">
+
+      <section class="rule-define-grid">
+        <aside class="rule-define-panel">
+          <div class="rule-define-kicker">Company Rule Builder</div>
+          <h1 class="rule-define-title">Define visual rules manually.</h1>
+          <p class="rule-define-copy">
+            Upload a PDF, detect or create the company, then draw boxes around only the values you want to learn. Existing company zones load automatically when a matching company is found.
+          </p>
+
+          <div id="ruleDefineDropzone" class="rule-define-dropzone">
+            <input id="ruleDefineFileInput" type="file" accept="application/pdf" />
+            <div class="training-upload-label"><i data-lucide="upload-cloud"></i> Upload PDF</div>
+            <div class="rule-define-file-name" id="ruleDefineFileName">No file selected</div>
+          </div>
+
+          <div class="rule-define-company">
+            <div class="training-upload-label"><i data-lucide="building-2"></i> Company</div>
+            <div class="manual-training-pill" id="ruleDefineCompany">No company selected</div>
+          </div>
+
+          <div class="rule-define-actions">
+            <button id="ruleDefineSave" class="btn-studio btn-studio-primary">Save Rules</button>
+            <button id="ruleDefineOverwrite" class="btn-studio btn-studio-outline">Overwrite Existing</button>
+          </div>
+
+          <div class="rule-define-actions rule-define-actions-inline">
+            <button id="ruleDefineUndo" class="btn-studio btn-studio-outline" disabled>Undo</button>
+            <button id="ruleDefineRedo" class="btn-studio btn-studio-outline" disabled>Redo</button>
+          </div>
+
+          <div class="rule-define-help-card">
+            <div class="rule-define-help-title">How to train</div>
+            <div class="rule-define-help-copy">Draw around `C25310-92942`, not `REPORT NO.`. Click a saved rule card to focus it. Drag the red box to move it and use the handles to resize it.</div>
+          </div>
+
+          <div id="ruleDefineStatus" class="training-note">Upload a PDF to begin manual rule definition.</div>
+        </aside>
+
+        <section class="rule-define-panel rule-define-viewer-wrap">
+          <div class="training-preview-toolbar">
+            <div>
+              <h2 class="training-panel-title" style="margin:0;">Preview</h2>
+              <p class="training-panel-copy">This preview follows the same studio pattern as AI Training, but focused on manual company-rule creation.</p>
+            </div>
+          </div>
+          <div id="ruleDefineViewer" class="rule-define-viewer">
+            <div class="rule-define-empty-viewer">
+              <i data-lucide="file-search"></i>
+              <div>Upload a PDF to start previewing and defining rules.</div>
+            </div>
+          </div>
+        </section>
+
+        <aside class="rule-define-panel">
+          <div class="training-preview-toolbar">
+            <div>
+              <h2 class="training-panel-title" style="margin:0;">Defined Rules</h2>
+              <p class="training-panel-copy"><span id="ruleDefineRuleCount">0</span> labeled items ready to save.</p>
+            </div>
+          </div>
+          <div id="ruleDefineRuleList" class="rule-define-rule-list"></div>
+        </aside>
+      </section>
+    </div>
+  </main>
+
+  <div id="manualTrainingModal" class="manual-training-modal hidden"></div>
+
+  <script type="module">
+    import { initRuleDefinePage } from "../app/RuleDefine.js";
+    initRuleDefinePage();
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (window.lucide) window.lucide.createIcons();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,579 @@
+/* ------------------------------------------------------------
+   RESPONSIVE LAYOUT — UNIVERSAL + PAGE-SPECIFIC
+   ------------------------------------------------------------ */
+
+/* ========== UNIVERSAL RESPONSIVE PATTERNS (from frontend/index.html) ========== */
+
+/* Container-based layout for all pages */
+.app-root,
+.training-app-shell,
+.tools-shell,
+.toolbox-shell,
+.studio-container {
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Responsive typography */
+@media (max-width: 900px) {
+  h1 {
+    font-size: 28px !important;
+    line-height: 1.2 !important;
+  }
+  
+  h2 {
+    font-size: 22px !important;
+  }
+  
+  h3 {
+    font-size: 18px !important;
+  }
+  
+  .home-title {
+    font-size: 32px !important;
+  }
+  
+  .home-subtitle {
+    font-size: 14px !important;
+  }
+}
+
+@media (max-width: 600px) {
+  h1 {
+    font-size: 24px !important;
+  }
+  
+  h2 {
+    font-size: 20px !important;
+  }
+  
+  .home-title {
+    font-size: 28px !important;
+  }
+  
+  body {
+    font-size: 14px;
+  }
+}
+
+/* Flexible grid/card system */
+.training-studio-grid,
+.rule-define-grid,
+.tools-shell-inner,
+.toolbox-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* Card responsive behavior */
+.training-side-panel,
+.rule-define-panel,
+.tools-side-panel,
+.toolbox-upload-card {
+  flex: 1 1 300px;
+  min-width: 280px;
+}
+
+.training-main-panel,
+.rule-define-viewer-wrap,
+.tools-main-panel,
+.toolbox-hero {
+  flex: 2 1 500px;
+}
+
+/* Mobile: single column layout */
+@media (max-width: 768px) {
+  .training-studio-grid,
+  .rule-define-grid,
+  .tools-shell-inner,
+  .toolbox-wrap {
+    flex-direction: column;
+  }
+  
+  .training-side-panel,
+  .rule-define-panel,
+  .tools-side-panel,
+  .toolbox-upload-card,
+  .training-main-panel,
+  .rule-define-viewer-wrap,
+  .tools-main-panel,
+  .toolbox-hero {
+    flex: 1 1 auto;
+    width: 100%;
+    min-width: unset;
+  }
+}
+
+/* Button and form element responsiveness */
+@media (max-width: 600px) {
+  .btn,
+  .btn-studio,
+  .settings-tab {
+    padding: 8px 12px !important;
+    font-size: 13px !important;
+  }
+  
+  .btn-row {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  
+  .setting-row {
+    flex-direction: column;
+    align-items: flex-start !important;
+  }
+  
+  .setting-row label {
+    margin-bottom: 8px;
+  }
+}
+
+/* Dropzone responsiveness */
+@media (max-width: 768px) {
+  .dropzone,
+  .training-dropzone,
+  .rule-define-dropzone,
+  .tools-dropzone {
+    padding: 16px !important;
+    min-height: 120px !important;
+  }
+  
+  .dropzone-inner {
+    padding: 12px !important;
+  }
+  
+  .dropzone-text-main {
+    font-size: 14px !important;
+  }
+  
+  .dropzone-text-sub {
+    font-size: 12px !important;
+  }
+}
+
+/* ========== PAGE-SPECIFIC RESPONSIVE LAYOUT ========== */
+
+/* ---------- DESKTOP (default) ---------- */
+body[data-page="home"] .workspace {
+  grid-template-columns: 220px 1fr 150px;
+}
+
+body[data-page="settings"] .workspace {
+  grid-template-columns: 220px 1fr;
+}
+
+body[data-page="redaction"] .workspace {
+  grid-template-columns: 220px 240px 1fr 150px;
+}
+
+/* Training page grid */
+body[data-page="training"] .training-studio-grid {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 24px;
+}
+
+/* Rule define page grid */
+body[data-page="rule-define"] .rule-define-grid {
+  display: grid;
+  grid-template-columns: 320px 1fr 280px;
+  gap: 24px;
+}
+
+/* PDF tools page */
+body[data-page="pdf-tools"] .toolbox-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ---------- MEDIUM (900px–1199px) ---------- */
+@media (max-width: 1199px) {
+
+  /* HOME: SIDEBAR → icon mode */
+  body[data-page="home"] .sidebar {
+    width: 70px !important;
+  }
+
+  body[data-page="home"] .sidebar .nav-label,
+  body[data-page="home"] .sidebar-user,
+  body[data-page="home"] .sidebar-footer,
+  body[data-page="home"] #uploadSection {
+    display: none !important;
+  }
+
+  /* HOME: TOOLS → icon mode */
+  body[data-page="home"] .right-panel {
+    width: 70px !important;
+  }
+
+  body[data-page="home"] #redactionSection button {
+    width: 48px !important;
+    font-size: 0 !important;
+  }
+
+  body[data-page="home"] #redactionSection button i {
+    width: 20px;
+    height: 20px;
+  }
+
+  /* HOME GRID */
+  body[data-page="home"] .workspace {
+    grid-template-columns: 70px 1fr 70px !important;
+  }
+
+  /* SETTINGS: keep full sidebar + 2‑col layout */
+  body[data-page="settings"] .workspace {
+    grid-template-columns: 220px 1fr !important;
+  }
+
+  body[data-page="settings"] .sidebar {
+    width: 220px !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  body[data-page="settings"] .sidebar-header,
+  body[data-page="settings"] .sidebar-footer,
+  body[data-page="settings"] #uploadSection,
+  body[data-page="settings"] .sidebar-user,
+  body[data-page="settings"] .nav-label {
+    display: block !important;
+    opacity: 1 !important;
+  }
+
+  body[data-page="settings"] .right-panel {
+    display: none !important;
+  }
+
+  /* REDACTION: SIDEBAR + TOOLS → icon mode, hide thumbnail sidebar */
+  body[data-page="redaction"] .sidebar {
+    width: 70px !important;
+  }
+
+  body[data-page="redaction"] .sidebar .nav-label,
+  body[data-page="redaction"] .sidebar-user,
+  body[data-page="redaction"] .sidebar-footer {
+    display: none !important;
+  }
+
+  body[data-page="redaction"] .thumbnail-sidebar {
+    display: none !important;
+  }
+
+  body[data-page="redaction"] .workspace {
+    grid-template-columns: 70px 1fr 70px !important;
+  }
+
+  body[data-page="redaction"] .right-panel {
+    width: 70px !important;
+  }
+
+  /* Right-panel: icons only */
+  body[data-page="redaction"] .tools-tab .tab-text,
+  body[data-page="redaction"] .btn-text {
+    display: none !important;
+  }
+
+  body[data-page="redaction"] .tools-tab {
+    padding: 6px 0 !important;
+  }
+
+  body[data-page="redaction"] .tools-group .btn-row .btn {
+    width: 44px !important;
+    padding: 6px 0 !important;
+    gap: 0 !important;
+  }
+
+  /* Plugins list: icons only */
+  body[data-page="redaction"] .plugin-category-header {
+    display: none !important;
+  }
+
+  body[data-page="redaction"] .plugin-version,
+  body[data-page="redaction"] .plugin-description {
+    display: none !important;
+  }
+
+  body[data-page="redaction"] .plugin-btn span,
+  body[data-page="redaction"] .plugin-toggle .btn-text {
+    display: none !important;
+  }
+
+  /* Keep upload usable, but make it icon-focused */
+  body[data-page="redaction"] #uploadSection .sidebar-section-title {
+    display: none !important;
+  }
+
+  body[data-page="redaction"] #uploadSection .dropzone-text-main,
+  body[data-page="redaction"] #uploadSection .dropzone-text-sub,
+  body[data-page="redaction"] #uploadSection #fileName {
+    display: none !important;
+  }
+
+  body[data-page="redaction"] #uploadSection .dropzone-inner {
+    min-height: auto !important;
+    padding: 2px 0 !important;
+  }
+  
+  /* TRAINING: switch to single column */
+  body[data-page="training"] .training-studio-grid {
+    grid-template-columns: 1fr !important;
+  }
+  
+  /* RULE DEFINE: switch to 2 columns */
+  body[data-page="rule-define"] .rule-define-grid {
+    grid-template-columns: 280px 1fr !important;
+  }
+  
+  body[data-page="rule-define"] .rule-define-panel:last-child {
+    display: none;
+  }
+}
+
+/* ---------- SMALL (< 900px) ---------- */
+@media (max-width: 900px) {
+
+  /* HOME: single column grid */
+  body[data-page="home"] .workspace {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* HOME: SIDEBAR → horizontal row */
+  body[data-page="home"] .sidebar {
+    width: 100% !important;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  body[data-page="home"] .sidebar-nav {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  body[data-page="home"] .sidebar-header,
+  body[data-page="home"] .sidebar-footer,
+  body[data-page="home"] #uploadSection {
+    display: none !important;
+  }
+
+  /* HOME: VIEWER full width */
+  body[data-page="home"] .viewer-panel {
+    width: 100% !important;
+  }
+
+  /* HOME: TOOLS → floating right */
+  body[data-page="home"] .right-panel {
+    width: 70px !important;
+    position: absolute;
+    right: 10px;
+    top: 120px;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px;
+  }
+
+  /* SETTINGS: no sidebar, single column */
+  body[data-page="settings"] .workspace {
+    grid-template-columns: 1fr !important;
+  }
+
+  body[data-page="settings"] .sidebar {
+    display: none !important;
+  }
+
+  body[data-page="settings"] .right-panel {
+    display: none !important;
+  }
+
+  /* REDACTION: keep icon mode for shrink */
+  body[data-page="redaction"] .sidebar {
+    width: 70px !important;
+  }
+
+  body[data-page="redaction"] .workspace {
+    grid-template-columns: 70px 1fr 70px !important;
+  }
+
+  body[data-page="redaction"] .right-panel {
+    width: 70px !important;
+  }
+  
+  /* TRAINING: compact layout */
+  body[data-page="training"] .training-side-panel {
+    order: 2;
+  }
+  
+  body[data-page="training"] .training-main-panel {
+    order: 1;
+  }
+  
+  /* RULE DEFINE: single column */
+  body[data-page="rule-define"] .rule-define-grid {
+    grid-template-columns: 1fr !important;
+  }
+  
+  body[data-page="rule-define"] .rule-define-panel:first-child {
+    order: 2;
+  }
+  
+  body[data-page="rule-define"] .rule-define-viewer-wrap {
+    order: 1;
+    margin-bottom: 20px;
+  }
+  
+  body[data-page="rule-define"] .rule-define-panel:last-child {
+    display: block;
+    order: 3;
+  }
+}
+
+/* ---------- VERY SMALL (< 600px) ---------- */
+@media (max-width: 600px) {
+  .app-root {
+    margin: 0;
+    border-radius: 0;
+  }
+
+  .viewer-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .zoom-controls {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  body[data-page="home"] .right-panel {
+    top: 150px;
+  }
+
+  /* REDACTION: make viewer take full width */
+  body[data-page="redaction"] .workspace {
+    /* Keep the 3-panel order: sidebar → PDF viewer → tools */
+    grid-template-columns: 56px 1fr 56px !important;
+  }
+
+  body[data-page="redaction"] .sidebar {
+    width: 56px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center;
+  }
+
+  body[data-page="redaction"] .sidebar-nav {
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  body[data-page="redaction"] .right-panel {
+    width: 56px !important;
+  }
+  
+  /* Training cards stack vertically */
+  .training-summary-grid {
+    flex-direction: column !important;
+  }
+  
+  .training-summary-card {
+    width: 100% !important;
+    margin-bottom: 12px;
+  }
+  
+  /* Settings tabs become vertical */
+  .settings-tabs {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .settings-tab {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ---------- HEADER RESPONSIVE ---------- */
+@media (max-width: 1100px) {
+  .topbar-center {
+    display: none;
+  }
+  
+  .topbar-left .software-name {
+    max-width: 200px;
+  }
+  
+  .topbar-title {
+    font-size: 16px;
+  }
+  
+  .topbar-subtitle {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .topbar {
+    padding: 6px 12px;
+    height: 48px;
+  }
+  
+  .logo-circle {
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+  }
+  
+  .topbar-title {
+    font-size: 15px;
+  }
+  
+  .topbar-subtitle {
+    display: none;
+  }
+  
+  .topbar-badge {
+    font-size: 10px;
+    padding: 1px 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .topbar {
+    height: 44px;
+  }
+  
+  .topbar-title {
+    font-size: 14px;
+  }
+  
+  .logo-circle {
+    width: 28px;
+    height: 28px;
+    font-size: 14px;
+  }
+  
+  /* Ultra-small adjustments */
+  .app-root,
+  .training-app-shell,
+  .tools-shell,
+  .toolbox-shell,
+  .studio-container {
+    padding: 12px !important;
+  }
+  
+  .home-hero-row {
+    gap: 12px !important;
+  }
+  
+  .home-card {
+    padding: 14px !important;
+  }
+}

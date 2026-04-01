@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Rasesh COAs PDF Redaction – Plugin Marketplace</title>
+
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="/vendor/lucide-offline.js" defer></script>
+  <script type="module" src="../app/plugin.js"></script>
+</head>
+
+<body data-theme="system" data-density="comfortable">
+  <div class="app-root marketplace-root">
+    <header class="topbar">
+      <div class="topbar-left">
+        <a
+          href="../../index.html"
+          class="logo-circle"
+          style="text-decoration: none; display: flex;"
+          aria-label="Go to home"
+        >R</a>
+        <div class="topbar-center">
+          <h1 class="topbar-title">Rasesh COAs PDF Redaction Plugin Marketplace</h1>
+          <span class="topbar-subtitle">Extend your COA redaction workflow</span>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <span class="topbar-badge">Plugins</span>
+      </div>
+    </header>
+
+    <main class="marketplace-main">
+      <div class="marketplace-inner">
+        <div class="marketplace-header">
+          <h2>
+            <i data-lucide="puzzle" class="icon-20"></i>
+            Available Plugins
+          </h2>
+          <button id="reloadPluginsBtn" class="btn btn-primary">
+            <i data-lucide="refresh-cw" class="icon-20"></i>
+            Reload Plugins
+          </button>
+        </div>
+
+        <div id="pluginMarketplace" class="plugin-marketplace-grid"></div>
+
+        <div class="marketplace-footer">
+          <a href="../../index.html" class="btn btn-ghost">
+            <i data-lucide="arrow-left" class="icon-20"></i>
+            Back to App
+          </a>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script type="module">
+    import { loadPluginMarketplace } from "../app/plugin.js";
+
+    document.addEventListener("DOMContentLoaded", () => {
+      if (window.lucide) window.lucide.createIcons();
+      loadPluginMarketplace();
+
+      document.getElementById("reloadPluginsBtn").onclick = async () => {
+      await fetch("/api/tools/reload", { method: "POST" });
+        loadPluginMarketplace();
+      };
+    });
+  </script>
+
+  <script>
+    // Sync theme + density from the same localStorage key used by the app.
+    document.addEventListener("DOMContentLoaded", () => {
+      try {
+        const raw = localStorage.getItem("coaSettings") || "{}";
+        const settings = JSON.parse(raw);
+        if (settings.theme) document.body.dataset.theme = settings.theme;
+        if (settings.density) document.body.dataset.density = settings.density;
+      } catch {
+        // Keep HTML defaults.
+      }
+    });
+  </script>
+</body>
+</html>

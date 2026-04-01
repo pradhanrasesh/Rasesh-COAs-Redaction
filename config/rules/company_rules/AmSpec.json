@@ -1,0 +1,51 @@
+{
+  "company_id": "AmSpec",
+  "display_name": "AmSpec Laboratories",
+
+  "detection": {
+    "match_strings": [
+      "AmSpec",
+      "AmSpec Global",
+      "AmSpec Laboratories"
+    ],
+    "priority": 9
+  },
+
+  "anchors": [
+    "AmSpec",
+    "Certificate of Analysis",
+    "Client",
+    "Sample ID"
+  ],
+
+  "regex": [
+    {
+      "id": "amspec_email",
+      "pattern": "[a-zA-Z0-9._%+-]+@(amspec|amspecglobal)\\.(com|net|co\\.uk)",
+      "action": "suggest"
+    },
+    {
+      "id": "amspec_coa",
+      "pattern": "AMSP[-\\s]?[A-Z0-9]{4,12}",
+      "action": "suggest"
+    }
+  ],
+
+  "layout": [
+    {
+      "id": "amspec_right_strip",
+      "rect": { "x0": 0.88, "y0": 0.05, "x1": 0.99, "y1": 0.95 },
+      "relative": true,
+      "action": "suggest"
+    }
+  ],
+
+  "barcode_qr": [
+    {
+      "id": "amspec_barcode",
+      "rect": { "x0": 0.89, "y0": 0.10, "x1": 0.98, "y1": 0.30 },
+      "relative": true,
+      "action": "suggest"
+    }
+  ]
+}

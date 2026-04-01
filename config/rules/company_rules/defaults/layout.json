@@ -1,0 +1,16 @@
+{
+  "layout_defaults": [
+    {
+      "id": "header_block",
+      "rect": { "x0": 0.0, "y0": 0.85, "x1": 1.0, "y1": 1.0 },
+      "page_scope": "first_page",
+      "action": "suggest"
+    },
+    {
+      "id": "footer_block",
+      "rect": { "x0": 0.0, "y0": 0.0, "x1": 1.0, "y1": 0.10 },
+      "page_scope": "all",
+      "action": "suggest"
+    }
+  ]
+}

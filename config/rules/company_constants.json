@@ -1,0 +1,62 @@
+{
+  "company_constants": {
+    "addresses": [
+      "A & L Canada Laboratories Inc.",
+      "2136 Jetstream Road, London, ON, N5V 3P5",
+      "PurpleFarm Labs",
+      "PPB Analytical Laboratories",
+      "PhotoChemia Labs",
+      "Pathogenia Laboratories",
+      "High North Laboratories",
+      "AmSpec Laboratories",
+      "123 Main Street, Toronto, ON, M5H 2N2",
+      "456 Oak Avenue, Vancouver, BC, V6B 3K9",
+      "789 Maple Road, Montreal, QC, H3A 1E9",
+      "LabCorp Canada",
+      "Eurofins Canada",
+      "SGS Canada",
+      "Bureau Veritas Canada"
+    ],
+    "phones": [
+      "(519) 457-2575",
+      "(519) 457-2664",
+      "905-244-4678",
+      "905-244-7477",
+      "905-244-4579",
+      "(416) 123-4567",
+      "(514) 987-6543",
+      "(604) 555-1234",
+      "1-800-123-4567",
+      "1-888-555-1212",
+      "(905) 123-4567",
+      "(403) 456-7890"
+    ],
+    "emails": [
+      "info@alcanada.com",
+      "support@purplefarm.com",
+      "contact@ppb.com",
+      "lab@photochemia.com",
+      "info@pathogenia.com",
+      "support@highnorth.com",
+      "info@amspec.com",
+      "info@labcorp.ca",
+      "contact@eurofins.ca",
+      "service@sgs.com",
+      "canada@bureauveritas.com",
+      "support@example.com",
+      "info@testlab.ca",
+      "admin@laboratory.com"
+    ],
+    "ignore_patterns": [
+      "Laboratory",
+      "Lab",
+      "Inc.",
+      "Ltd.",
+      "Canada",
+      "Ontario",
+      "British Columbia",
+      "Quebec",
+      "Alberta"
+    ]
+  }
+}

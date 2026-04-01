@@ -1,0 +1,49 @@
+{
+  "company_id": "PhotoChemia",
+  "display_name": "PhotoChemia Labs",
+
+  "detection": {
+    "match_strings": [
+      "PhotoChemia",
+      "Photo Chemia"
+    ],
+    "priority": 8
+  },
+
+  "anchors": [
+    "Product Code",
+    "Batch No",
+    "PhotoChemia"
+  ],
+
+  "regex": [
+    {
+      "id": "pc_coa",
+      "pattern": "PC[-\\s]?[A-Z0-9]{4,12}",
+      "action": "suggest"
+    },
+    {
+      "id": "pc_product_code",
+      "pattern": "Product\\s*Code[:\\s]*[A-Z0-9\\-]{3,15}",
+      "action": "suggest"
+    }
+  ],
+
+  "layout": [
+    {
+      "id": "pc_lower_left",
+      "rect": { "x0": 0.02, "y0": 0.02, "x1": 0.30, "y1": 0.20 },
+      "relative": true,
+      "action": "suggest"
+    }
+  ],
+
+  "barcode_qr": [
+    {
+      "id": "pc_barcode",
+      "rect": { "x0": 0.30, "y0": 0.02, "x1": 0.48, "y1": 0.12 },
+      "relative": true,
+      "action": "suggest"
+    }
+  ]
+}

@@ -1,0 +1,421 @@
+/* ------------------------------------------------------------
+   MODERN SIDEBAR — MATCHES TOOLBAR STYLE
+   ------------------------------------------------------------ */
+
+.sidebar {
+  width: 220px;
+  background: var(--bg-sidebar);
+  border-right: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  padding: 12px 10px;
+  gap: 14px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  transition: width 0.25s ease, padding 0.25s ease;
+}
+
+/* Studio-style Sidebar (matching AI Training/Rule Define) */
+.sidebar-studio {
+  width: 280px;
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 26px;
+  box-shadow: var(--shadow-soft);
+  padding: 24px;
+  margin: 8px;
+}
+
+.sidebar-studio .sidebar-header {
+  text-align: left;
+  padding: 0 0 20px 0;
+  border-bottom: 1px solid var(--border-subtle);
+  margin-bottom: 20px;
+}
+
+.sidebar-studio .sidebar-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sidebar-studio .logo-mark-animated {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  color: white;
+  font-weight: 800;
+  font-size: 18px;
+}
+
+.sidebar-studio .logo-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-studio .logo-title {
+  font-weight: 800;
+  font-size: 18px;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.sidebar-studio .logo-subtitle {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.sidebar-studio .sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sidebar-studio .nav-item {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid transparent;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.sidebar-studio .nav-item:hover {
+  color: var(--text-primary);
+  border-color: var(--border-subtle);
+  background: var(--accent-soft);
+}
+
+.sidebar-studio .nav-item.nav-item-active {
+  color: var(--text-primary);
+  border-color: var(--border-subtle);
+  background: var(--accent-soft);
+}
+
+.sidebar-studio .nav-label {
+  font-weight: 600;
+}
+
+.sidebar-studio .icon-20 {
+  width: 20px;
+  height: 20px;
+  stroke-width: 1.8;
+}
+
+/* Sidebar footer for studio style */
+.sidebar-studio .sidebar-footer {
+  margin-top: auto;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.sidebar-studio .sidebar-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.sidebar-studio .btn-studio {
+  padding: 8px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--border-subtle);
+  background: var(--surface);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.sidebar-studio .btn-studio-outline {
+  background: transparent;
+}
+
+.sidebar-studio .btn-studio:hover {
+  border-color: var(--border);
+  background: var(--accent-soft);
+  color: var(--text-primary);
+}
+
+.sidebar-studio .btn-small {
+  padding: 6px 10px;
+  font-size: 11px;
+}
+
+/* Used on standalone pages (home/batch/training) where we don't render
+   the full `workspace` grid. */
+.sidebar-static {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 10000;
+}
+
+/* HEADER */
+.sidebar-header {
+  text-align: center;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.sidebar-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: 0.5px;
+}
+
+/* Collapse Button */
+.sidebar-collapse-btn {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.sidebar-collapse-btn:hover {
+  color: var(--accent);
+}
+
+/* USER BADGE */
+.sidebar-user {
+  text-align: center;
+  margin-bottom: 4px;
+  transition: opacity 0.25s ease;
+}
+
+.sidebar-user .badge {
+  background: var(--accent);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+}
+
+/* NAVIGATION */
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Section titles inside sidebar partials */
+.sidebar-section-title {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.nav-item {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.15s ease, padding 0.25s ease, gap 0.25s ease, transform 0.15s ease;
+}
+
+.nav-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.nav-item-active {
+  background: var(--accent-soft);
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* UPLOAD PANEL */
+#uploadSection {
+  background: var(--bg-panel);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-subtle);
+  padding: 10px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: opacity 0.25s ease;
+}
+
+/* FOOTER */
+.sidebar-footer {
+  margin-top: auto;
+  padding-top: 10px;
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: opacity 0.25s ease;
+}
+
+/* COLLAPSED SIDEBAR */
+body.sidebar-collapsed .sidebar {
+  width: 70px;
+}
+
+body.sidebar-collapsed .nav-label {
+  display: none;
+}
+
+body.sidebar-collapsed .sidebar-footer,
+body.sidebar-collapsed #uploadSection {
+  display: none;
+}
+
+body.sidebar-collapsed .sidebar-user .badge {
+  font-size: 0;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+body.sidebar-collapsed .sidebar-user,
+body.sidebar-collapsed .sidebar-footer,
+body.sidebar-collapsed #uploadSection {
+  opacity: 0;
+}
+
+/* HOVER EXPAND */
+body.sidebar-collapsed .sidebar:hover {
+  width: 180px;
+}
+
+body.sidebar-collapsed .sidebar:hover .nav-label {
+  display: inline;
+}
+
+body.sidebar-collapsed .sidebar:hover .sidebar-footer,
+body.sidebar-collapsed .sidebar:hover #uploadSection,
+body.sidebar-collapsed .sidebar:hover .sidebar-user {
+  opacity: 1;
+}
+
+/* FLOATING MINI SIDEBAR */
+body.sidebar-floating .sidebar {
+  position: fixed;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 60px;
+  padding: 6px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+body.sidebar-floating .nav-label,
+body.sidebar-floating .sidebar-footer,
+body.sidebar-floating #uploadSection {
+  display: none;
+}
+
+/* ------------------------------------------------------------
+   Animated “Rasesh pattern” logo (infinite loop)
+   Used in left sidebar header only.
+   ------------------------------------------------------------ */
+.logo-mark-animated {
+  display: inline-block;
+  font-weight: 900;
+  letter-spacing: -0.08em;
+  font-size: 18px;
+  color: transparent;
+
+  /* “pattern inside R”: mix repeating gradients + animated position */
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      rgba(59, 130, 246, 0.95) 0px,
+      rgba(34, 211, 238, 0.95) 10px,
+      rgba(59, 130, 246, 0.55) 20px
+    ),
+    repeating-linear-gradient(
+      135deg,
+      rgba(16, 185, 129, 0.55) 0px,
+      rgba(34, 211, 238, 0.35) 8px,
+      rgba(16, 185, 129, 0.10) 16px
+    ),
+    linear-gradient(90deg, rgba(59, 130, 246, 1), rgba(34, 211, 238, 1));
+
+  background-size: 180% 180%, 140% 140%, 100% 100%;
+  background-position: 0% 50%, 100% 50%, 50% 50%;
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  animation: logoRaseshShift 3.2s linear infinite;
+  filter: saturate(1.05) contrast(1.05);
+}
+
+@keyframes logoRaseshShift {
+  0% {
+    background-position: 0% 50%, 100% 50%, 50% 50%;
+  }
+  50% {
+    background-position: 100% 40%, 0% 60%, 60% 40%;
+  }
+  100% {
+    background-position: 0% 50%, 100% 50%, 50% 50%;
+  }
+}
+
+/* Standalone page content offset (so content doesn't sit under sidebar) */
+body[data-page="batch-redaction"] .app-root,
+body[data-page="training"] .app-root,
+body[data-page="ai-training"] .app-root {
+  margin-left: 220px;
+}
+
+@media (max-width: 1199px) {
+  body[data-page="batch-redaction"] .app-root,
+  body[data-page="training"] .app-root,
+  body[data-page="ai-training"] .app-root {
+    margin-left: 70px;
+  }
+}
+
+@media (max-width: 900px) {
+  body[data-page="batch-redaction"] .sidebar-static,
+  body[data-page="training"] .sidebar-static,
+  body[data-page="ai-training"] .sidebar-static {
+    position: fixed;
+    width: 70px !important;
+  }
+
+  body[data-page="batch-redaction"] .app-root,
+  body[data-page="training"] .app-root,
+  body[data-page="ai-training"] .app-root {
+    margin-left: 70px;
+  }
+
+  body[data-page="batch-redaction"] .sidebar-static .nav-label,
+  body[data-page="training"] .sidebar-static .nav-label,
+  body[data-page="ai-training"] .sidebar-static .nav-label {
+    display: none !important;
+  }
+}

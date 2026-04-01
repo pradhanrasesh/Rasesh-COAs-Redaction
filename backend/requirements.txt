@@ -1,0 +1,31 @@
+# ------------------------------------------------------------
+# Backend dependencies for COA Redaction Tool (Redectio)
+# ------------------------------------------------------------
+
+# --- Web Framework ---
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+python-multipart==0.0.6
+pydantic==2.5.0
+pydantic-core==2.14.3
+
+# --- PDF Processing ---
+PyMuPDF==1.23.7          # fitz
+PyMuPDFb==1.23.7         # sometimes required for Windows builds
+
+# --- OCR ---
+pytesseract==0.3.10
+Pillow==10.1.0
+
+# --- Data / Utilities ---
+python-dotenv==1.0.0
+numpy==1.26.2             # required by some OCR/PDF operations
+
+# --- Optional but recommended ---
+regex==2023.10.3          # for advanced pattern matching
+
+pdf2image
+pyzbar
+pikepdf
+python-docx
+pytest

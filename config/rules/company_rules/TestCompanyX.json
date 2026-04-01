@@ -1,0 +1,24 @@
+{
+  "company_id": "TestCompanyX",
+  "display_name": "TestCompanyX",
+  "detection": {
+    "match_strings": [
+      "TestCompanyX",
+      "TestCompanyX"
+    ],
+    "priority": 1
+  },
+  "anchors": [
+    "TestCompanyX",
+    "TestCompanyX"
+  ],
+  "regex": [
+    {
+      "id": "r1",
+      "pattern": "HELLO123",
+      "action": "suggest"
+    }
+  ],
+  "layout": [],
+  "barcode_qr": []
+}

@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rasesh COAs PDF Redaction – AI Training Studio</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="/vendor/lucide-offline.js" defer></script>
+  <script src="../pdfjs/pdf.js"></script>
+  <script type="module" src="../app/layout.js"></script>
+</head>
+
+<body data-theme="system" data-density="comfortable" data-page="training">
+  <div id="alertContainer"></div>
+  <div id="toastContainer" class="toast-container"></div>
+
+  <main class="training-app-shell">
+    <div class="training-app-inner">
+      <header id="base-header"></header>
+
+      <section class="training-studio-grid">
+        <aside class="training-side-panel">
+          <div class="training-eyebrow">
+            <i data-lucide="sparkles"></i>
+            Training workflow
+          </div>
+          <h1 class="training-side-title">Teach the model how your documents should be redacted.</h1>
+          <p class="training-side-copy">
+            This follows the Rasesh COAs PDF Redaction pattern more closely: upload the original, optionally add a redacted reference, review learned zones, rename labels, add manual items, and save the rule back into Rasesh COAs PDF Redaction.
+          </p>
+
+          <div class="training-upload-card">
+            <div class="training-upload-label">
+              <i data-lucide="file-up"></i>
+              Original document
+            </div>
+            <div id="unredactedDrop" class="training-dropzone">
+              <input id="unredactedInput" type="file" accept="application/pdf" class="dropzone-input" />
+              <i data-lucide="upload-cloud"></i>
+              <div class="training-drop-main">Drop the source PDF here</div>
+              <div class="training-drop-sub">Required for training</div>
+              <div id="unredactedName" class="training-file-name"></div>
+            </div>
+          </div>
+
+          <div class="training-upload-card">
+            <div class="training-upload-label">
+              <i data-lucide="shield-check"></i>
+              Redacted reference
+            </div>
+            <div id="redactedDrop" class="training-dropzone">
+              <input id="redactedInput" type="file" accept="application/pdf" class="dropzone-input" />
+              <i data-lucide="files"></i>
+              <div class="training-drop-main">Drop the redacted comparison PDF</div>
+              <div class="training-drop-sub">Optional, but gives stronger training</div>
+              <div id="redactedName" class="training-file-name"></div>
+            </div>
+          </div>
+
+          <div class="training-action-row">
+            <button id="btnTrainPair" class="btn-studio btn-studio-primary" disabled>
+              <i data-lucide="zap"></i>
+              <span>Start AI Training</span>
+            </button>
+            <button id="btnClearTraining" class="btn-studio btn-studio-outline">
+              <i data-lucide="refresh-cw"></i>
+              <span>Clear</span>
+            </button>
+          </div>
+
+          <div id="trainingStatus" class="training-note">
+            Upload files to begin. Original-only mode is supported, and pair mode gives better results.
+          </div>
+        </aside>
+
+        <section class="training-main-panel">
+          <div class="training-state training-empty-state active" id="trainingIdleState">
+            <i data-lucide="brain" style="width:64px;height:64px;opacity:0.3;"></i>
+            <h2 class="training-panel-title">2. Training & Comparison</h2>
+            <p class="training-panel-copy">Start training to see learned zones, editable labels, and the visual comparison preview.</p>
+          </div>
+
+          <div class="training-state training-progress-state" id="trainingAnalyzingState">
+            <div class="training-progress-ring">
+              <svg viewBox="0 0 120 120">
+                <circle cx="60" cy="60" r="52" stroke="currentColor" stroke-width="8" fill="none" opacity="0.12"></circle>
+                <circle id="trainingProgressCircle" cx="60" cy="60" r="52" stroke="currentColor" stroke-width="8" fill="none" stroke-linecap="round" stroke-dasharray="326.7" stroke-dashoffset="326.7"></circle>
+              </svg>
+              <div id="trainingProgressValue" class="training-progress-ring-value">0%</div>
+            </div>
+            <h2 class="training-panel-title">Analyzing Documents</h2>
+            <p id="trainingProgressText" class="training-panel-copy">Extracting text, comparing pages, and building candidate redactions.</p>
+          </div>
+
+          <div class="training-state" id="trainingPreviewState">
+            <div class="training-preview-shell">
+              <div class="training-summary-grid">
+                <article class="training-summary-card">
+                  <div class="training-summary-card-head">
+                    <div class="training-summary-kicker">Identified company</div>
+                    <button id="btnEditTrainingCompany" class="training-mini-action" type="button">Edit Name</button>
+                  </div>
+                  <div id="trainingCompanyName" class="training-summary-value">Universal</div>
+                </article>
+                <article class="training-summary-card">
+                  <div class="training-summary-kicker">Learned items</div>
+                  <div id="trainingSuggestionCount" class="training-summary-value">0</div>
+                </article>
+              </div>
+
+              <div class="training-preview-toolbar">
+                <div>
+                  <h2 class="training-panel-title" style="margin:0;">Preview & Review</h2>
+                  <p class="training-panel-copy">Edit labels, remove weak matches, add manual items, then commit the model to your vault.</p>
+                </div>
+                <div class="training-preview-toolbar-actions">
+                  <button id="btnZoomOutTraining" class="btn-studio btn-studio-outline small">-</button>
+                  <div id="trainingZoomValue" class="training-zoom-chip">100%</div>
+                  <button id="btnZoomInTraining" class="btn-studio btn-studio-outline small">+</button>
+                  <button id="btnCompareMode" class="btn-studio btn-studio-outline small">Double View</button>
+                  <button id="btnSaveModel" class="btn-studio btn-studio-primary small">Commit to Vault</button>
+                </div>
+              </div>
+
+              <div class="training-preview-grid">
+                <aside class="training-suggestion-panel">
+                  <div class="training-list-head">
+                    <div class="training-upload-label" style="margin-bottom:0;">
+                      <i data-lucide="list-checks"></i>
+                      Suggested redactions
+                    </div>
+                    <button id="btnAddManualTraining" class="training-mini-action" type="button">Add Manual</button>
+                  </div>
+                  <div id="trainingSuggestionList" class="training-suggestion-list"></div>
+                </aside>
+
+                <section class="training-viewer-panel">
+                  <div class="training-preview-toolbar">
+                    <div class="training-upload-label" style="margin:0;">
+                      <i data-lucide="files"></i>
+                      Visual comparison
+                    </div>
+                  </div>
+                  <div class="training-viewer-frame">
+                    <div id="trainingViewerContainer" class="studio-viewer-split"></div>
+                  </div>
+                </section>
+              </div>
+
+              <div class="training-info-banner">
+                The model will learn these patterns and apply them to future files from <b id="trainingInfoCompany">Universal</b>.
+              </div>
+            </div>
+          </div>
+
+          <div class="training-state training-completed-state" id="trainingCompletedState">
+            <i data-lucide="check-circle-2" style="width:64px;height:64px;color:var(--accent);"></i>
+            <h2 class="training-panel-title">Model Saved</h2>
+            <p class="training-panel-copy">The AI training data was saved to your local rules. You can now use it in the editor or batch flow.</p>
+            <button id="btnTrainAnother" class="btn-studio btn-studio-primary">Train Another File</button>
+          </div>
+
+          <div class="training-state training-error-state" id="trainingErrorState">
+            <i data-lucide="alert-circle" style="width:64px;height:64px;color:#ef4444;"></i>
+            <h2 class="training-panel-title">Training Failed</h2>
+            <p id="trainingErrorText" class="training-panel-copy">Please review the files and try again.</p>
+          </div>
+        </section>
+      </section>
+    </div>
+  </main>
+
+  <script type="module">
+    // Global error handler for module loading
+    window.addEventListener('error', (e) => {
+      console.error('Global error:', e.error);
+      console.error('Error loading module:', e.filename);
+    });
+    
+    // Log when module starts executing
+    console.log('Training page module script starting...');
+    
+    import {
+      initTrainingViewer,
+      getTrainingEvents,
+      setCompareMode,
+      addManualTrainingItem,
+      getTrainingState,
+      removeTrainingItem,
+      updateTrainingItem,
+      setViewerZoom,
+      getViewerZoom
+    } from "../app/TrainingViewer.js";
+    
+    import AITraining from "../app/AITraining.js";
+
+    console.log('Modules imported successfully');
+    
+    const BACKEND_URL = "";
+    const unredactedInput = document.getElementById("unredactedInput");
+    const redactedInput = document.getElementById("redactedInput");
+    const btnTrain = document.getElementById("btnTrainPair");
+    const btnSaveModel = document.getElementById("btnSaveModel");
+    const btnCompareMode = document.getElementById("btnCompareMode");
+    const trainingStatus = document.getElementById("trainingStatus");
+    const progressCircle = document.getElementById("trainingProgressCircle");
+    const progressValue = document.getElementById("trainingProgressValue");
+    const progressText = document.getElementById("trainingProgressText");
+    const suggestionList = document.getElementById("trainingSuggestionList");
+    const companyName = document.getElementById("trainingCompanyName");
+    const suggestionCount = document.getElementById("trainingSuggestionCount");
+    const errorText = document.getElementById("trainingErrorText");
+    const zoomValue = document.getElementById("trainingZoomValue");
+    const infoCompany = document.getElementById("trainingInfoCompany");
+
+    let currentCompanyId = "universal";
+    let currentDisplayName = "universal";
+    let progressTimer = null;
+    let progress = 0;
+
+    function setThemeFromStorage() {
+      try {
+        const raw = localStorage.getItem("coaSettings") || "{}";
+        const settings = JSON.parse(raw);
+        if (settings.theme) document.body.dataset.theme = settings.theme;
+        if (settings.density) document.body.dataset.density = settings.density;
+      } catch {}
+    }
+
+    function escapeHtml(value) {
+      return String(value || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    function showState(id) {
+      document.querySelectorAll(".training-state").forEach((el) => el.classList.remove("active"));
+      document.getElementById(id)?.classList.add("active");
+    }
+
+    function updateProgress(value, message) {
+      progress = Math.max(0, Math.min(100, value));
+      const circumference = 326.7;
+      const offset = circumference - ((circumference * progress) / 100);
+      progressCircle.style.strokeDashoffset = String(offset);
+      progressValue.textContent = `${progress}%`;
+      if (message) progressText.textContent = message;
+    }
+
+    function startProgressAnimation() {
+      stopProgressAnimation();
+      updateProgress(8, "Reading files and preparing the training session.");
+      progressTimer = setInterval(() => {
+        if (progress < 84) {
+          const next = progress + (progress < 40 ? 8 : 4);
+          updateProgress(next, progress < 45
+            ? "Extracting text and scanning document content."
+            : "Comparing patterns and building training suggestions.");
+        }
+      }, 500);
+    }
+
+    function stopProgressAnimation() {
+      if (progressTimer) {
+        clearInterval(progressTimer);
+        progressTimer = null;
+      }
+    }
+
+    function refreshViewerMeta() {
+      zoomValue.textContent = `${Math.round(getViewerZoom() * 100)}%`;
+      const state = getTrainingState();
+      suggestionCount.textContent = String(state.suggestions.length + state.manual.length);
+      suggestionList.innerHTML = "";
+
+      const allItems = [
+        ...state.suggestions.map((item, index) => ({ ...item, kind: "suggestion", index, origin: "AI Suggestion" })),
+        ...state.manual.map((item, index) => ({ ...item, kind: "manual", index, origin: "Manual Label" })),
+      ];
+
+      if (!allItems.length) {
+        suggestionList.innerHTML = `
+          <div class="training-suggestion-item">
+            <div class="training-suggestion-label">No suggestions</div>
+            <div class="training-suggestion-text">The backend returned no training candidates for this run.</div>
+          </div>
+        `;
+        return;
+      }
+
+      allItems.forEach((item) => {
+        const card = document.createElement("article");
+        card.className = "training-suggestion-item";
+        card.innerHTML = `
+          <div class="training-suggestion-card-head">
+            <span class="training-suggestion-origin">${escapeHtml(item.origin)}</span>
+            <button class="training-suggestion-remove" type="button">Remove</button>
+          </div>
+          <input class="training-inline-input" type="text" value="${escapeHtml(item.label || "")}" />
+          <textarea class="training-inline-textarea" rows="2" placeholder="Captured text or manual term">${escapeHtml(item.sample_text || item.text || "")}</textarea>
+          <div class="training-suggestion-meta">Page ${item.page || 1}${item.group ? ` · ${escapeHtml(item.group)}` : ""}</div>
+        `;
+
+        const labelInput = card.querySelector(".training-inline-input");
+        const textInput = card.querySelector(".training-inline-textarea");
+        const removeBtn = card.querySelector(".training-suggestion-remove");
+
+        labelInput.addEventListener("change", () => {
+          updateTrainingItem(item.kind, item.index, { label: labelInput.value });
+          refreshViewerMeta();
+        });
+        textInput.addEventListener("change", () => {
+          updateTrainingItem(item.kind, item.index, { text: textInput.value });
+          refreshViewerMeta();
+        });
+        removeBtn.addEventListener("click", () => {
+          removeTrainingItem(item.kind, item.index);
+          refreshViewerMeta();
+        });
+
+        suggestionList.appendChild(card);
+      });
+    }
+
+    function updateTrainEnabled() {
+      const hasOriginal = !!unredactedInput?.files?.[0];
+      btnTrain.disabled = !hasOriginal;
+      btnTrain.querySelector("span").textContent = redactedInput?.files?.[0]
+        ? "Start AI Training"
+        : "Train from Original";
+    }
+
+    function wireDrop(dropEl, inputEl, nameEl) {
+      console.log('wireDrop called:', { dropEl: !!dropEl, inputEl: !!inputEl, nameEl: !!nameEl });
+      
+      if (!dropEl || !inputEl || !nameEl) {
+        console.error('Missing elements in wireDrop:', { dropEl, inputEl, nameEl });
+        return;
+      }
+      
+      dropEl.addEventListener("click", () => {
+        console.log('Dropzone clicked, triggering file input');
+        inputEl.click();
+      });
+      
+      inputEl.addEventListener("change", () => {
+        const f = inputEl.files?.[0];
+        console.log('File selected:', f?.name);
+        nameEl.textContent = f ? f.name : "";
+        updateTrainEnabled();
+      });
+      
+      dropEl.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        dropEl.classList.add("dragover");
+      });
+      
+      dropEl.addEventListener("dragleave", () => {
+        dropEl.classList.remove("dragover");
+      });
+      
+      dropEl.addEventListener("drop", (e) => {
+        e.preventDefault();
+        dropEl.classList.remove("dragover");
+        const f = e.dataTransfer.files?.[0];
+        if (!f) return;
+        console.log('File dropped:', f.name);
+        const dt = new DataTransfer();
+        dt.items.add(f);
+        inputEl.files = dt.files;
+        nameEl.textContent = f.name;
+        updateTrainEnabled();
+      });
+    }
+
+    function resetTrainingUI() {
+      stopProgressAnimation();
+      currentCompanyId = "universal";
+      currentDisplayName = "universal";
+      companyName.textContent = currentDisplayName;
+      infoCompany.textContent = currentDisplayName;
+      trainingStatus.textContent = "Upload files to begin. Original-only mode is supported, and pair mode gives better results.";
+      suggestionList.innerHTML = "";
+      suggestionCount.textContent = "0";
+      showState("trainingIdleState");
+      updateProgress(0, "Extracting text, comparing pages, and building candidate redactions.");
+    }
+
+    document.getElementById("btnClearTraining")?.addEventListener("click", () => {
+      unredactedInput.value = "";
+      redactedInput.value = "";
+      document.getElementById("unredactedName").textContent = "";
+      document.getElementById("redactedName").textContent = "";
+      updateTrainEnabled();
+      resetTrainingUI();
+      document.getElementById("trainingViewerContainer").innerHTML = "";
+    });
+
+    document.getElementById("btnTrainAnother")?.addEventListener("click", () => {
+      resetTrainingUI();
+    });
+
+    document.getElementById("btnEditTrainingCompany")?.addEventListener("click", () => {
+      const next = window.prompt("Enter company name:", currentDisplayName);
+      if (!next) return;
+      currentDisplayName = next.trim();
+      companyName.textContent = currentDisplayName;
+      infoCompany.textContent = currentDisplayName;
+    });
+
+    document.getElementById("btnAddManualTraining")?.addEventListener("click", () => {
+      const text = window.prompt("Enter text to redact manually:");
+      if (!text) return;
+      const label = window.prompt("Enter label (e.g. Name, Address):", "MANUAL LABEL");
+      if (!label) return;
+      addManualTrainingItem({ label, text });
+      refreshViewerMeta();
+      trainingStatus.textContent = `Added manual training item "${label}".`;
+    });
+
+    document.getElementById("btnZoomOutTraining")?.addEventListener("click", () => {
+      setViewerZoom(getViewerZoom() - 0.1);
+      refreshViewerMeta();
+    });
+
+    document.getElementById("btnZoomInTraining")?.addEventListener("click", () => {
+      setViewerZoom(getViewerZoom() + 0.1);
+      refreshViewerMeta();
+    });
+
+    btnTrain?.addEventListener("click", async () => {
+      const originalFile = unredactedInput.files?.[0];
+      const redactedFile = redactedInput.files?.[0];
+      if (!originalFile) return;
+
+      btnTrain.disabled = true;
+      showState("trainingAnalyzingState");
+      trainingStatus.textContent = redactedFile
+        ? "Comparing original and redacted documents..."
+        : "Analyzing original document and generating suggestions...";
+      startProgressAnimation();
+
+      try {
+        const form = new FormData();
+        form.append("unredacted", originalFile, originalFile.name);
+        if (redactedFile) form.append("redacted", redactedFile, redactedFile.name);
+
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 120000); // 120 seconds
+
+        const res = await fetch(`${BACKEND_URL}/api/ai/train-pair`, {
+          method: "POST",
+          body: form,
+          signal: controller.signal
+        });
+        clearTimeout(timeoutId);
+        const json = await res.json().catch(() => ({}));
+
+        if (!res.ok) {
+          throw new Error(json.error || json.detail || `Server returned ${res.status}`);
+        }
+
+        stopProgressAnimation();
+        updateProgress(100, "Analysis complete.");
+
+        currentCompanyId = json.company_id || "universal";
+        currentDisplayName = json.display_name || currentCompanyId;
+        companyName.textContent = currentDisplayName;
+        infoCompany.textContent = currentDisplayName;
+
+        const originalBytes = new Uint8Array(await originalFile.arrayBuffer());
+        let redactedBytes = null;
+        if (redactedFile) redactedBytes = new Uint8Array(await redactedFile.arrayBuffer());
+        await initTrainingViewer(originalBytes, json.suggestions || [], redactedBytes);
+        refreshViewerMeta();
+
+        trainingStatus.textContent = "Detection complete. Review the suggestions, rename anything needed, then commit to the vault.";
+        showState("trainingPreviewState");
+      } catch (error) {
+        stopProgressAnimation();
+        errorText.textContent = error?.message || String(error);
+        trainingStatus.textContent = `Training failed: ${error?.message || error}`;
+        showState("trainingErrorState");
+      } finally {
+        updateTrainEnabled();
+      }
+    });
+
+    btnCompareMode?.addEventListener("click", () => {
+      const active = setCompareMode();
+      btnCompareMode.textContent = active ? "Single View" : "Double View";
+    });
+
+    btnSaveModel?.addEventListener("click", async () => {
+      const events = getTrainingEvents();
+      if (!events.length) {
+        trainingStatus.textContent = "No valid training events were detected to save.";
+        return;
+      }
+
+      btnSaveModel.disabled = true;
+      trainingStatus.textContent = "Saving trained model...";
+
+      try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 60000); // 60 seconds
+
+        const res = await fetch(`${BACKEND_URL}/api/ai/learn`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            company_id: currentCompanyId,
+            display_name: currentDisplayName,
+            items: events
+          }),
+          signal: controller.signal
+        });
+        clearTimeout(timeoutId);
+        const json = await res.json().catch(() => ({}));
+
+        if (!res.ok) {
+          throw new Error(json.error || json.detail || `Server returned ${res.status}`);
+        }
+
+        if (json.status === "skipped") {
+          trainingStatus.textContent = "No valid text examples were found to save.";
+          return;
+        }
+
+        trainingStatus.textContent = "Model saved successfully.";
+        showState("trainingCompletedState");
+      } catch (error) {
+        trainingStatus.textContent = `Failed to save model: ${error?.message || error}`;
+        errorText.textContent = error?.message || String(error);
+        showState("trainingErrorState");
+      } finally {
+        btnSaveModel.disabled = false;
+      }
+    });
+
+    // Wait for DOM to be fully ready before wiring up event listeners
+    function initTrainingPage() {
+      console.log('initTrainingPage called');
+      setThemeFromStorage();
+      
+      const unredactedDrop = document.getElementById("unredactedDrop");
+      const redactedDrop = document.getElementById("redactedDrop");
+      const unredactedName = document.getElementById("unredactedName");
+      const redactedName = document.getElementById("redactedName");
+      
+      console.log('Elements found:', {
+        unredactedDrop: !!unredactedDrop,
+        unredactedInput: !!unredactedInput,
+        unredactedName: !!unredactedName,
+        redactedDrop: !!redactedDrop,
+        redactedInput: !!redactedInput,
+        redactedName: !!redactedName
+      });
+      
+      if (unredactedDrop && unredactedInput && unredactedName) {
+        console.log('Wiring unredacted dropzone');
+        wireDrop(unredactedDrop, unredactedInput, unredactedName);
+      } else {
+        console.error('Could not find unredacted file upload elements');
+      }
+      
+      if (redactedDrop && redactedInput && redactedName) {
+        console.log('Wiring redacted dropzone');
+        wireDrop(redactedDrop, redactedInput, redactedName);
+      } else {
+        console.error('Could not find redacted file upload elements');
+      }
+      
+      updateTrainEnabled();
+      
+      if (window.lucide) window.lucide.createIcons();
+      console.log('initTrainingPage completed');
+    }
+    
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+      console.log('Document still loading, adding DOMContentLoaded listener');
+      document.addEventListener('DOMContentLoaded', initTrainingPage);
+    } else {
+      console.log('Document already loaded, calling initTrainingPage immediately');
+      initTrainingPage();
+    }
+  </script>
+</body>
+</html>

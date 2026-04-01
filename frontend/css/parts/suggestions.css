@@ -1,0 +1,103 @@
+.suggestions {
+  position: absolute;
+  top: 100%;              /* appear directly under input */
+  left: 0;
+  width: 100%;            /* match input width */
+  background: var(--surface);           /* ⭐ theme-aware */
+  border: 1px solid var(--border);      /* ⭐ theme-aware border */
+  border-radius: 6px;
+  margin-top: 4px;
+  max-height: 240px;      /* increased for more items */
+  overflow-y: auto;
+  z-index: 9999;          /* ensure visible above all panels */
+  box-shadow: var(--shadow-subtle);     /* ⭐ soft shadow */
+  color: var(--text-primary);           /* ⭐ readable text */
+  font-size: 12px;
+}
+
+.suggestion-item {
+  padding: 8px 10px;
+  cursor: pointer;
+  color: var(--text-primary);     /* ⭐ readable */
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background-color 0.15s ease;
+}
+
+.suggestion-item:hover {
+  background: var(--accent-soft);       /* ⭐ theme-aware hover */
+  color: var(--accent);
+}
+
+.suggestion-action {
+  background: var(--surface-raised);
+  font-weight: 500;
+}
+
+.suggestion-action:hover {
+  background: var(--accent-soft);
+}
+
+.suggestion-action-btn {
+  margin-left: 8px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: var(--accent-soft);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  font-size: 10px;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+}
+
+.suggestion-action-btn:hover {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+
+.suggestion-action-btn i {
+  width: 12px;
+  height: 12px;
+}
+
+/* Word already in redaction list */
+.suggestion-item .suggestion-action-btn[title*="Remove"] {
+  background: var(--success-soft);
+  color: var(--success);
+  border-color: var(--success);
+}
+
+.suggestion-item .suggestion-action-btn[title*="Remove"]:hover {
+  background: var(--success);
+  color: white;
+}
+
+/* Hidden state */
+.hidden {
+  display: none !important;
+}
+
+/* Scrollbar styling */
+.suggestions::-webkit-scrollbar {
+  width: 6px;
+}
+
+.suggestions::-webkit-scrollbar-track {
+  background: var(--surface-raised);
+  border-radius: 3px;
+}
+
+.suggestions::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+
+.suggestions::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}

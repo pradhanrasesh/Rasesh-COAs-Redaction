@@ -1,0 +1,6 @@
+{
+  "compress": true,
+  "echo": true,
+  "pdf_to_images": true,
+  "true_redact": true
+}

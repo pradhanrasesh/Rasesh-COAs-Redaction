@@ -1,0 +1,350 @@
+body[data-page="rule-define"] {
+  display: block;
+}
+
+body[data-page="rule-define"] .training-app-shell {
+  min-height: 100vh;
+  padding: 24px;
+  background:
+    radial-gradient(circle at top left, rgba(59, 130, 246, 0.12), transparent 26%),
+    radial-gradient(circle at bottom right, rgba(239, 68, 68, 0.12), transparent 24%),
+    var(--bg-main);
+}
+
+body[data-page="rule-define"] .training-app-inner {
+  max-width: 1480px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+body[data-page="rule-define"] .training-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 22px;
+  border-radius: 24px;
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-soft);
+}
+
+body[data-page="rule-define"] .training-nav {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+body[data-page="rule-define"] .training-nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  text-decoration: none;
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid transparent;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+body[data-page="rule-define"] .training-nav-link.active,
+body[data-page="rule-define"] .training-nav-link:hover {
+  color: var(--text-primary);
+  border-color: var(--border-subtle);
+  background: var(--accent-soft);
+}
+
+body[data-page="rule-define"] .training-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+body[data-page="rule-define"] .training-brand-copy {
+  display: flex;
+  flex-direction: column;
+}
+
+body[data-page="rule-define"] .training-brand-title {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+body[data-page="rule-define"] .training-brand-subtitle {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.rule-define-grid {
+  display: grid;
+  grid-template-columns: 384px minmax(0, 1fr) 384px;
+  gap: 18px;
+  align-items: start;
+}
+
+.rule-define-panel {
+  padding: 24px;
+  border-radius: 26px;
+  border: 1px solid var(--border-subtle, rgba(148, 163, 184, 0.2));
+  background: var(--surface);
+  box-shadow: var(--shadow-soft);
+}
+
+.rule-define-kicker {
+  margin-bottom: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted, #64748b);
+}
+
+.rule-define-title {
+  margin: 0 0 10px;
+  font-size: clamp(28px, 3vw, 38px);
+  line-height: 1.02;
+}
+
+.rule-define-copy {
+  margin: 0 0 18px;
+  color: var(--text-secondary, #64748b);
+  line-height: 1.6;
+}
+
+.rule-define-dropzone {
+  position: relative;
+  padding: 24px;
+  border-radius: 22px;
+  border: 1px dashed rgba(59, 130, 246, 0.5);
+  background: rgba(59, 130, 246, 0.04);
+  cursor: pointer;
+}
+
+.rule-define-dropzone.dragover {
+  border-color: rgba(220, 38, 38, 0.8);
+  background: rgba(220, 38, 38, 0.07);
+}
+
+.rule-define-dropzone input {
+  display: none;
+}
+
+.rule-define-file-name {
+  margin-top: 14px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary, inherit);
+}
+
+.rule-define-company {
+  margin-top: 18px;
+}
+
+.rule-define-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.rule-define-actions-inline {
+  flex-direction: row;
+}
+
+.rule-define-actions-inline > * {
+  flex: 1;
+}
+
+.rule-define-help-card {
+  margin-top: 18px;
+  padding: 16px 18px;
+  border-radius: 18px;
+  border: 1px solid rgba(239, 68, 68, 0.18);
+  background: rgba(239, 68, 68, 0.05);
+}
+
+.rule-define-help-title {
+  margin-bottom: 6px;
+  font-weight: 800;
+}
+
+.rule-define-help-copy {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text-secondary, #64748b);
+}
+
+.rule-define-viewer-wrap {
+  min-height: 78vh;
+}
+
+.rule-define-viewer {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-height: 78vh;
+  overflow: auto;
+  padding-right: 8px;
+}
+
+.rule-define-empty-viewer {
+  min-height: 420px;
+  display: grid;
+  place-items: center;
+  gap: 10px;
+  text-align: center;
+  border-radius: 22px;
+  border: 1px dashed var(--border-subtle, rgba(148, 163, 184, 0.2));
+  background: var(--surface-alt, rgba(255, 255, 255, 0.03));
+  color: var(--text-muted, #64748b);
+}
+
+.rule-define-empty-viewer i {
+  width: 44px;
+  height: 44px;
+}
+
+.rule-define-page {
+  position: relative;
+  margin: 0 auto;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
+.rule-define-page-canvas,
+.rule-define-overlay {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.rule-define-overlay {
+  position: absolute;
+  inset: 0;
+  cursor: crosshair;
+}
+
+.rule-define-rule-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.rule-define-item-card,
+.rule-define-empty-card {
+  padding: 16px;
+  border-radius: 18px;
+  border: 1px solid var(--border-subtle, rgba(148, 163, 184, 0.18));
+  background: var(--surface-alt, rgba(255, 255, 255, 0.03));
+}
+
+.rule-define-item-card {
+  cursor: pointer;
+  transition: border-color 140ms ease, transform 140ms ease, box-shadow 140ms ease;
+}
+
+.rule-define-item-card:hover,
+.rule-define-item-card.active {
+  border-color: rgba(239, 68, 68, 0.48);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 28px rgba(239, 68, 68, 0.08);
+}
+
+.rule-define-item-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.rule-define-item-label {
+  font-weight: 800;
+}
+
+.rule-define-item-meta {
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--text-secondary, #64748b);
+}
+
+.rule-define-item-text {
+  font-family: "IBM Plex Mono", "Fira Code", monospace;
+  white-space: pre-wrap;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.rule-define-item-remove {
+  border: none;
+  background: transparent;
+  color: #ef4444;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+body[data-theme="dark"][data-page="rule-define"] .training-app-shell,
+body[data-theme="system"][data-page="rule-define"] .training-app-shell {
+  background:
+    radial-gradient(circle at 0% 0%, rgba(37, 99, 235, 0.18), transparent 26%),
+    radial-gradient(circle at 100% 100%, rgba(239, 68, 68, 0.16), transparent 24%),
+    linear-gradient(180deg, #071122 0%, #040b18 100%);
+}
+
+body[data-theme="dark"][data-page="rule-define"] .training-topbar,
+body[data-theme="dark"][data-page="rule-define"] .training-nav-link,
+body[data-theme="dark"][data-page="rule-define"] .rule-define-panel,
+body[data-theme="dark"][data-page="rule-define"] .rule-define-item-card,
+body[data-theme="dark"][data-page="rule-define"] .rule-define-empty-card,
+body[data-theme="dark"][data-page="rule-define"] .rule-define-empty-viewer {
+  background: rgba(7, 18, 34, 0.82);
+  border-color: rgba(59, 130, 246, 0.16);
+}
+
+@media (prefers-color-scheme: dark) {
+  body[data-theme="system"][data-page="rule-define"] .training-topbar,
+  body[data-theme="system"][data-page="rule-define"] .training-nav-link,
+  body[data-theme="system"][data-page="rule-define"] .rule-define-panel,
+  body[data-theme="system"][data-page="rule-define"] .rule-define-item-card,
+  body[data-theme="system"][data-page="rule-define"] .rule-define-empty-card,
+  body[data-theme="system"][data-page="rule-define"] .rule-define-empty-viewer {
+    background: rgba(7, 18, 34, 0.82);
+    border-color: rgba(59, 130, 246, 0.16);
+  }
+}
+
+@media (max-width: 1280px) {
+  .rule-define-grid {
+    grid-template-columns: 350px minmax(0, 1fr);
+  }
+
+  .rule-define-grid > :last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 900px) {
+  .rule-define-grid {
+    grid-template-columns: 1fr;
+  }
+
+  body[data-page="rule-define"] .training-topbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  body[data-page="rule-define"] .training-app-shell {
+    padding: 14px;
+  }
+
+  .rule-define-viewer {
+    max-height: none;
+  }
+}

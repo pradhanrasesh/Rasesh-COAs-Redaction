@@ -1,0 +1,94 @@
+/* ---------- Tooltips (data-tooltip) ---------- */
+[data-tooltip] {
+  position: relative;
+}
+
+[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px) scale(0.98);
+  background: rgba(15, 23, 42, 0.95);
+  color: #e5e7eb;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  white-space: pre-line;
+  max-width: 260px;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease-out, transform 0.15s ease-out;
+  transition-delay: 120ms;
+  z-index: 9999;
+}
+
+[data-tooltip]:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0) scale(1);
+}
+
+/* ---------- Studio Panel (matching rule-define sidepanel) ---------- */
+.studio-panel {
+  padding: 24px;
+  border-radius: 26px;
+  border: 1px solid var(--border-subtle, rgba(148, 163, 184, 0.2));
+  background: var(--surface);
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.studio-panel::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background: radial-gradient(600px 120px at 10% 0%, rgba(59, 130, 246, 0.22), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.18s ease;
+  pointer-events: none;
+}
+
+.studio-panel:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(15, 23, 42, 0.18);
+  border-color: rgba(59, 130, 246, 0.35);
+}
+
+.studio-panel:hover::before {
+  opacity: 1;
+}
+
+/* ---------- Generic Shine & Lift Effect (for cards and buttons) ---------- */
+.hover-shine {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.hover-shine::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background: radial-gradient(600px 120px at 10% 0%, rgba(59, 130, 246, 0.22), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.18s ease;
+  pointer-events: none;
+}
+
+.hover-shine:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+}
+
+.hover-shine:hover::before {
+  opacity: 1;
+}
+
+/* Icon wiggle for elements with icons */
+.hover-shine:hover i svg {
+  transform: rotate(-10deg) scale(1.1);
+  transition: transform 0.22s ease;
+}

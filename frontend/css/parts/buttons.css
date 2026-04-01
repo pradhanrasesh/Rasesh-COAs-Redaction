@@ -1,0 +1,111 @@
+/* ------------------------------------------------------------
+   MODERN THEME-AWARE BUTTON SYSTEM
+   ------------------------------------------------------------ */
+
+.btn {
+  border-radius: 8px;
+  border: 1px solid var(--border-subtle);
+  padding: 6px 10px;
+  font-size: 12px;
+  cursor: pointer;
+
+  background: var(--surface);          /* ⭐ theme-aware */
+  color: var(--text-primary);          /* ⭐ readable in both themes */
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+
+  position: relative;
+  overflow: hidden;
+
+  transition: background 0.15s ease, border-color 0.15s ease,
+              color 0.15s ease, transform 0.15s ease;
+}
+
+/* Shine effect */
+.btn::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background: radial-gradient(600px 120px at 10% 0%, rgba(59, 130, 246, 0.22), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.18s ease;
+  pointer-events: none;
+}
+
+.btn:hover:not(:disabled) {
+  background: var(--accent-soft);      /* ⭐ soft hover */
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.btn:hover:not(:disabled)::before {
+  opacity: 1;
+}
+
+/* Icon wiggle for buttons with icons */
+.btn:hover:not(:disabled) i svg {
+  transform: rotate(-10deg) scale(1.1);
+  transition: transform 0.22s ease;
+}
+
+.btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+/* ------------------------------------------------------------
+   PRIMARY BUTTON
+   ------------------------------------------------------------ */
+.btn-primary {
+  background: var(--accent);
+  border-color: var(--accent-strong);
+  color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--accent-strong);
+}
+
+/* ------------------------------------------------------------
+   GHOST BUTTON (subtle)
+   ------------------------------------------------------------ */
+.btn-ghost {
+  background: transparent;
+  border-color: var(--border-subtle);
+  color: var(--text-secondary);
+}
+
+.btn-ghost:hover:not(:disabled) {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+/* ------------------------------------------------------------
+   TOGGLE BUTTON (used in tools)
+   ------------------------------------------------------------ */
+.btn-toggle {
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+}
+
+.btn-toggle:hover {
+  background: var(--accent-soft);
+}
+
+.btn-toggle-active {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ------------------------------------------------------------
+   SMALL BUTTON
+   ------------------------------------------------------------ */
+.btn-small {
+  padding: 4px 8px;
+  font-size: 11px;
+}

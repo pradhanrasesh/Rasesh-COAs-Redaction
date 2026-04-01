@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rasesh COAs PDF Redaction – Settings</title>
+
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="/vendor/lucide-offline.js" defer></script>
+  <script type="module" src="../app/layout.js"></script>
+  <script type="module" src="../app/settings.js"></script>
+</head>
+
+<body data-theme="light" data-density="comfortable" data-page="settings">
+
+  <div class="app-root">
+
+    <!-- STUDIO HEADER -->
+    <!-- ===========================
+         RASESH — STUDIO HEADER
+         Full HTML + CSS (self‑contained)
+    =========================== -->
+    <header id="base-header"></header>
+
+    <div class="app-body">
+      <main class="main">
+        <div class="content">
+          <div class="workspace">
+            <!-- MAIN SETTINGS PANEL (full width) -->
+            <div class="settings-container">
+
+          <!-- Tabs -->
+          <div class="settings-tabs">
+            <button class="settings-tab settings-tab-active" data-tab="appearance">
+              <i data-lucide="palette" class="icon-16"></i>
+              <span>Appearance</span>
+            </button>
+            <button class="settings-tab" data-tab="output">
+              <i data-lucide="download" class="icon-16"></i>
+              <span>Output</span>
+            </button>
+            <button class="settings-tab" data-tab="toolbar">
+              <i data-lucide="wrench" class="icon-16"></i>
+              <span>Toolbar</span>
+            </button>
+            <button class="settings-tab" data-tab="shortcuts">
+              <i data-lucide="keyboard" class="icon-16"></i>
+              <span>Shortcuts</span>
+            </button>
+            <button class="settings-tab" data-tab="redaction-list">
+              <i data-lucide="list" class="icon-16"></i>
+              <span>Redaction List</span>
+            </button>
+          </div>
+
+          <!-- Appearance Panel -->
+          <section class="settings-panel" data-tab-panel="appearance">
+            <div class="setting-row vertical">
+              <label>Theme</label>
+              <div class="theme-options">
+                <div class="theme-option" data-theme="light">
+                  <i data-lucide="sun" class="icon-20"></i>
+                  <span>Light</span>
+                </div>
+                <div class="theme-option" data-theme="dark">
+                  <i data-lucide="moon" class="icon-20"></i>
+                  <span>Dark</span>
+                </div>
+                <div class="theme-option" data-theme="system">
+                  <i data-lucide="monitor" class="icon-20"></i>
+                  <span>System</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="setting-row vertical">
+              <label>UI Density</label>
+              <div class="density-options">
+                <button class="density-option" data-density="comfortable">Comfortable</button>
+                <button class="density-option" data-density="compact">Compact</button>
+              </div>
+            </div>
+
+            <div class="setting-row vertical">
+              <label>Default Redaction Color</label>
+              <input id="settingDefaultColor" type="color" />
+            </div>
+
+            <div class="setting-row">
+              <label>Sticky Search Bar</label>
+              <input id="settingStickySearch" type="checkbox" />
+            </div>
+
+            <div class="setting-row">
+              <label>Auto Highlight Mode</label>
+              <input id="settingAutoHighlight" type="checkbox" />
+            </div>
+
+            <div class="setting-row vertical">
+              <label>AI Sensitivity</label>
+              <div style="display:flex; align-items:center; gap: 12px; width: 100%;">
+                <input
+                  id="settingAISensitivity"
+                  type="range"
+                  min="0"
+                  max="100"
+                  step="1"
+                  style="flex: 1;"
+                />
+                <span id="settingAISensitivityValue" style="font-weight:700; min-width: 44px; text-align:center;">50</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- Output Panel -->
+          <section class="settings-panel hidden" data-tab-panel="output">
+            <div class="setting-row vertical">
+              <label>Output File Name Pattern</label>
+              <input id="settingOutputPattern" type="text" class="input-text" />
+
+              <div class="pattern-buttons">
+                <button data-token="{name}">+ Original Name</button>
+                <button data-token="{date}">+ Date</button>
+                <button data-token="{time}">+ Time</button>
+                <button data-token="{redacted}">+ Redacted Suffix</button>
+                <button data-token="{rejected}">+ Rejected Suffix</button>
+              </div>
+
+              <div class="field-label">Preview</div>
+              <div id="settingOutputPreview" class="output-preview"></div>
+            </div>
+          </section>
+
+          <!-- Toolbar Panel -->
+          <section class="settings-panel hidden" data-tab-panel="toolbar">
+            <div class="setting-row vertical">
+              <label>Toolbar Customization</label>
+              <div class="toolbar-list">
+                <div class="toolbar-item" data-tool="selection">
+                  <span class="toolbar-label">Selection Tools</span>
+                  <button class="btn-eye" type="button"><i data-lucide="eye"></i></button>
+                </div>
+                <div class="toolbar-item" data-tool="undoRedo">
+                  <span class="toolbar-label">Undo / Redo</span>
+                  <button class="btn-eye" type="button"><i data-lucide="eye"></i></button>
+                </div>
+                <div class="toolbar-item" data-tool="zoomNav">
+                  <span class="toolbar-label">Zoom & Navigation</span>
+                  <button class="btn-eye" type="button"><i data-lucide="eye"></i></button>
+                </div>
+                <div class="toolbar-item" data-tool="aiDetection">
+                  <span class="toolbar-label">AI Detection</span>
+                  <button class="btn-eye" type="button"><i data-lucide="eye"></i></button>
+                </div>
+                <div class="toolbar-item" data-tool="applySave">
+                  <span class="toolbar-label">Apply & Save</span>
+                  <button class="btn-eye" type="button"><i data-lucide="eye"></i></button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Redaction Word List Panel -->
+          <section class="settings-panel hidden" data-tab-panel="redaction-list">
+            <div class="setting-row vertical">
+              <label>Redaction Word List</label>
+              <p class="setting-description">Manage words that should be automatically redacted. Words are case-insensitive.</p>
+              
+              <div class="redaction-list-controls" style="display: flex; gap: 8px; margin-bottom: 16px;">
+                <button id="btnAddWord" class="btn btn-small">
+                  <i data-lucide="plus" class="icon-16"></i> Add Word
+                </button>
+                <button id="btnApplyWordList" class="btn btn-small btn-primary">
+                  <i data-lucide="play" class="icon-16"></i> Apply to Current PDF
+                </button>
+                <button id="btnExportWordList" class="btn btn-small btn-ghost">
+                  <i data-lucide="download" class="icon-16"></i> Export
+                </button>
+                <button id="btnImportWordList" class="btn btn-small btn-ghost">
+                  <i data-lucide="upload" class="icon-16"></i> Import
+                </button>
+                <button id="btnClearWordList" class="btn btn-small btn-danger">
+                  <i data-lucide="trash-2" class="icon-16"></i> Clear All
+                </button>
+              </div>
+              
+              <div class="word-list-container" style="border: 1px solid var(--border); border-radius: 6px; padding: 12px; max-height: 300px; overflow-y: auto;">
+                <div id="redactionWordList" class="word-list">
+                  <!-- Words will be populated by JavaScript -->
+                  <div class="word-list-empty">Loading redaction word list...</div>
+                </div>
+              </div>
+              
+              <div class="word-list-stats" style="margin-top: 12px; font-size: 12px; color: var(--text-secondary);">
+                <span id="wordListCount">0</span> words in list
+              </div>
+            </div>
+            
+            <div class="setting-row vertical" style="margin-top: 24px;">
+              <label>Quick Add Common Words</label>
+              <p class="setting-description">Add common redaction words with one click.</p>
+              
+              <div class="common-words-grid" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px;">
+                <button class="btn btn-small btn-outline common-word-btn" data-word="CONFIDENTIAL">CONFIDENTIAL</button>
+                <button class="btn btn-small btn-outline common-word-btn" data-word="PROPRIETARY">PROPRIETARY</button>
+                <button class="btn btn-small btn-outline common-word-btn" data-word="INTERNAL">INTERNAL</button>
+                <button class="btn btn-small btn-outline common-word-btn" data-word="SENSITIVE">SENSITIVE</button>
+                <button class="btn btn-small btn-outline common-word-btn" data-word="PRIVATE">PRIVATE</button>
+                <button class="btn btn-small btn-outline common-word-btn" data-word="RESTRICTED">RESTRICTED</button>
+                <button class="btn btn-small btn-outline common-word-btn" data-word="SECRET">SECRET</button>
+                <button class="btn btn-small btn-outline common-word-btn" data-word="CLASSIFIED">CLASSIFIED</button>
+              </div>
+            </div>
+          </section>
+
+          <!-- Shortcuts Panel -->
+          <section class="settings-panel hidden" data-tab-panel="shortcuts">
+            <div class="setting-row vertical">
+              <label>Keyboard Shortcuts</label>
+              <div class="shortcuts-grid">
+                <div class="shortcut-row"><span>Undo</span><span>Ctrl+Z</span></div>
+                <div class="shortcut-row"><span>Redo</span><span>Ctrl+Y</span></div>
+                <div class="shortcut-row"><span>Search</span><span>Ctrl+F</span></div>
+                <div class="shortcut-row"><span>Next Page</span><span>→</span></div>
+                <div class="shortcut-row"><span>Prev Page</span><span>←</span></div>
+                <div class="shortcut-row"><span>Text Tool</span><span>T</span></div>
+                <div class="shortcut-row"><span>Box Tool</span><span>B</span></div>
+                <div class="shortcut-row"><span>Highlight Tool</span><span>H</span></div>
+              </div>
+            </div>
+          </section>
+
+          <div class="settings-save-row">
+            <button id="btnSaveSettings" class="btn btn-primary">Save Settings</button>
+            <button id="btnResetDefaults" class="btn btn-ghost" style="margin-left: 12px;">Reset to Defaults</button>
+          </div>
+
+            </div>
+          </div>
+        </main>
+      </div>
+
+    </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (window.lucide) window.lucide.createIcons();
+    });
+  </script>
+
+</body>
+</html>

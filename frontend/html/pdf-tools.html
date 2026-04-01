@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rasesh COAs PDF Redaction – PDF Toolbox</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="/vendor/lucide-offline.js" defer></script>
+  <script type="importmap">
+    {
+      "imports": {
+        "@google/genai": "https://esm.run/@google/genai"
+      }
+    }
+  </script>
+  <script type="module" src="../app/layout.js"></script>
+</head>
+<body data-theme="system" data-density="comfortable" data-page="pdf-tools">
+  <!-- STUDIO HEADER -->
+  <!-- ===========================
+       RASESH — STUDIO HEADER
+       Full HTML + CSS (self‑contained)
+  =========================== -->
+  <header id="base-header"></header>
+
+  <main class="toolbox-shell">
+    <div class="toolbox-wrap">
+      <header class="toolbox-hero">
+        <a href="../index.html" class="training-nav-link"><i data-lucide="arrow-left"></i><span>Back Home</span></a>
+        <div class="toolbox-badge"><i data-lucide="sparkles"></i><span>Offline PDF workspace</span></div>
+        <h1 class="toolbox-title">PDF Toolbox</h1>
+        <p class="toolbox-copy">Document review, security, formatting, extraction, removal, automation, and developer utilities in one place, wired to your local backend.</p>
+      </header>
+
+      <section class="toolbox-upload-strip">
+        <label class="toolbox-upload-card" id="toolsDropzone">
+          <input id="toolsPrimaryFile" type="file" accept="application/pdf" />
+          <div class="toolbox-upload-icon"><i data-lucide="file-up"></i></div>
+          <div>
+            <div class="toolbox-upload-title">Main PDF</div>
+            <div class="toolbox-upload-copy">Drop or click to choose the PDF you want to use across toolbox actions.</div>
+          </div>
+          <div class="toolbox-upload-name" id="toolsFilename">No file selected</div>
+        </label>
+        <div id="toolsStatus" class="tools-status">Upload a PDF, then open any tool card.</div>
+      </section>
+
+      <section class="toolbox-sections" id="toolsOverview"></section>
+    </div>
+  </main>
+
+  <div id="toolsModal" class="toolbox-modal hidden"></div>
+
+  <script type="module">
+    import { initPdfToolsPage } from "../app/pdf_tools.js";
+    initPdfToolsPage();
+  </script>
+</body>
+</html>

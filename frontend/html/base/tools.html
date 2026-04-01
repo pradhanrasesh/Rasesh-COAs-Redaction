@@ -1,0 +1,140 @@
+<section class="tools-panel">
+  <div class="tools-tabs" role="tablist" aria-label="Tools and Plugins">
+    <button
+      id="btnToolsTab"
+      class="tools-tab btn btn-toggle btn-small btn-toggle-active"
+      type="button"
+      role="tab"
+      aria-selected="true"
+      data-panel="tools"
+    >
+      <i data-lucide="wand-2" class="icon-20"></i>
+      <span class="tab-text">Tools</span>
+    </button>
+
+    <button
+      id="btnPluginsTab"
+      class="tools-tab btn btn-toggle btn-small"
+      type="button"
+      role="tab"
+      aria-selected="false"
+      data-panel="plugins"
+    >
+      <i data-lucide="puzzle" class="icon-20"></i>
+      <span class="tab-text">Plugins</span>
+    </button>
+  </div>
+
+  <!-- TOOLS -->
+  <div id="toolsModePanel" class="tools-mode-panel">
+    <div class="tools-group">
+      <div class="btn-row">
+        <button
+          id="btnModeSelectText"
+          class="btn btn-toggle btn-small"
+          data-tooltip="Text redaction&#10;Tip: Click + drag to select text (multi-span).&#10;Shortcut: T"
+        >
+          <i data-lucide="type" class="icon-20"></i>
+        </button>
+
+        <button
+          id="btnModeDrawBox"
+          class="btn btn-toggle btn-small btn-toggle-active"
+          data-tooltip="Box redaction&#10;Tip: Drag to redact the selected region.&#10;Shortcut: B"
+        >
+          <i data-lucide="square" class="icon-20"></i>
+        </button>
+
+        <button
+          id="btnAutoBarcodes"
+          class="btn btn-sm"
+          data-tooltip="Barcode / QR detection&#10;Tip: Detect barcodes as suggested redactions.&#10;Shortcut: (none)"
+        >
+          <i data-lucide="scan-line" class="icon-20"></i>
+        </button>
+      </div>
+
+      <div class="btn-row">
+        <button
+          id="btnUndo"
+          class="btn btn-ghost btn-small"
+          data-tooltip="Undo&#10;Tip: Undo your last redaction action.&#10;Shortcut: Ctrl+Z"
+        >
+          <i data-lucide="undo-2" class="icon-20"></i>
+        </button>
+
+        <button
+          id="btnRedo"
+          class="btn btn-ghost btn-small"
+          data-tooltip="Redo&#10;Tip: Redo the last undone action.&#10;Shortcut: Ctrl+Y"
+        >
+          <i data-lucide="redo-2" class="icon-20"></i>
+        </button>
+      </div>
+
+      <div class="btn-row">
+        <button
+          id="btnAutoSuggest"
+          class="btn btn-primary btn-small"
+          data-tooltip="Auto suggestions&#10;Tip: Detect sensitive fields and suggest redactions.&#10;Shortcut: (none)"
+        >
+          <i data-lucide="sparkles" class="icon-20"></i>
+          <span class="btn-text">Auto</span>
+        </button>
+      </div>
+
+      <div class="btn-row">
+        <button
+          id="btnAutoApply"
+          class="btn btn-ghost btn-small"
+          disabled
+          data-tooltip="Apply selected suggestions&#10;Tip: Redacts all selected auto-suggestions (offline)."
+        >
+          <i data-lucide="check" class="icon-20"></i>
+          <span class="btn-text">Apply All</span>
+        </button>
+        <button
+          id="btnAutoClear"
+          class="btn btn-ghost btn-small"
+          disabled
+          data-tooltip="Clear all suggestions&#10;Tip: Clears the current auto-suggestion list."
+        >
+          <i data-lucide="trash-2" class="icon-20"></i>
+          <span class="btn-text">Clear All</span>
+        </button>
+      </div>
+
+      <div class="color-row">
+        <input id="redactionColor" type="color" value="#000000" />
+      </div>
+
+      <!-- AI Suggestions List -->
+      <div id="aiSuggestionsContainer" class="ai-suggestions-container hidden">
+        <div class="ai-suggestions-header">
+          <h4>AI Suggestions</h4>
+          <button id="btnCloseSuggestions" class="btn btn-ghost btn-small" data-tooltip="Close suggestions list">
+            <i data-lucide="x" class="icon-16"></i>
+          </button>
+        </div>
+        <div id="aiSuggestionsList" class="ai-suggestions-list">
+          <!-- Suggestions will be dynamically inserted here -->
+        </div>
+        <div class="ai-suggestions-footer">
+          <button id="btnApplyAllSuggestions" class="btn btn-primary btn-small" disabled>
+            <i data-lucide="check" class="icon-16"></i>
+            Apply All Selected
+          </button>
+          <button id="btnClearAllSuggestions" class="btn btn-ghost btn-small" disabled>
+            <i data-lucide="trash-2" class="icon-16"></i>
+            Clear All
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PLUGINS -->
+  <section id="pluginsModePanel" class="tools-mode-panel hidden">
+    <div id="pluginToolsContainer" class="plugin-tools-list"></div>
+  </section>
+</section>

@@ -1,0 +1,59 @@
+{
+  "version": "2.0",
+  "description": "Universal rules used ONLY when company is unknown",
+
+  "text_rules": [
+    {
+      "id": "univ_email",
+      "label": "Email",
+      "type": "regex",
+      "pattern": "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[A-Za-z]{2,}",
+      "group": "pii",
+      "action": "suggest"
+    },
+    {
+      "id": "univ_phone",
+      "label": "Phone",
+      "type": "regex",
+      "pattern": "(\\+?\\d[\\d\\s().-]{7,}\\d)",
+      "group": "pii",
+      "action": "suggest"
+    },
+    {
+      "id": "univ_report_number",
+      "label": "Report Number",
+      "type": "regex",
+      "pattern": "(Report\\s*(No\\.?|Number))[:\\s]*[A-Za-z0-9\\-]+",
+      "group": "document_id",
+      "action": "suggest"
+    },
+    {
+      "id": "univ_account_number",
+      "label": "Account Number",
+      "type": "regex",
+      "pattern": "(Account\\s*(No\\.?|Number))[:\\s]*[A-Za-z0-9\\-]+",
+      "group": "client_info",
+      "action": "suggest"
+    },
+    {
+      "id": "univ_sample_id",
+      "label": "Sample ID",
+      "type": "regex",
+      "pattern": "(Sample\\s*ID|Lab\\s*Number)[:\\s]*[A-Za-z0-9\\-]+",
+      "group": "product_info",
+      "action": "suggest"
+    }
+  ],
+
+  "barcode_rules": {
+    "enabled": true,
+    "default_action": "suggest"
+  },
+
+  "qr_rules": {
+    "enabled": true,
+    "default_action": "suggest"
+  },
+
+  "layout_rules": []
+}

@@ -1,0 +1,201 @@
+/* ------------------------------------------------------------
+   TOOLS / PLUGINS — MODERN TABS
+   ------------------------------------------------------------ */
+
+.right-panel {
+  width: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 0 !important;
+  gap: 10px;
+}
+
+.tools-panel {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tools-tabs {
+  display: flex;
+  gap: 8px;
+  padding: 6px;
+  border-radius: 14px;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-panel);
+  box-shadow: var(--shadow-subtle);
+}
+
+.tools-tab {
+  flex: 1;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  border-radius: 12px;
+  padding: 6px 8px;
+  white-space: nowrap;
+}
+
+.tools-tab .tab-text {
+  font-size: 11px;
+}
+
+/* AI Suggestions Container */
+.ai-suggestions-container {
+  width: 100%;
+  margin-top: 12px;
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  background: var(--bg-panel);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 300px;
+  overflow: hidden;
+}
+
+.ai-suggestions-container.hidden {
+  display: none;
+}
+
+.ai-suggestions-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ai-suggestions-header h4 {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.ai-suggestions-list {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-right: 4px;
+}
+
+.ai-suggestion-item {
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ai-suggestion-item.selected {
+  border-color: var(--accent-primary);
+  background: rgba(var(--accent-primary-rgb), 0.05);
+}
+
+.ai-suggestion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ai-suggestion-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.ai-suggestion-page {
+  font-size: 10px;
+  color: var(--text-muted);
+  background: var(--bg-subtle);
+  padding: 2px 6px;
+  border-radius: 8px;
+}
+
+.ai-suggestion-text {
+  font-size: 12px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ai-suggestion-actions {
+  display: flex;
+  gap: 6px;
+  justify-content: flex-end;
+}
+
+.ai-suggestion-actions .btn {
+  padding: 4px 8px;
+  font-size: 11px;
+  height: auto;
+}
+
+.ai-suggestions-footer {
+  display: flex;
+  gap: 8px;
+  justify-content: space-between;
+}
+
+.ai-suggestions-footer .btn {
+  flex: 1;
+  justify-content: center;
+  font-size: 11px;
+  padding: 6px 8px;
+}
+
+.tools-mode-panel {
+  width: 100%;
+  background: var(--bg-panel);
+  border-radius: 14px;
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-subtle);
+  padding: 10px 8px;
+  max-height: calc(100vh - 190px);
+  overflow: auto;
+}
+
+.tools-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.btn-row {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+}
+
+.btn-row .btn {
+  width: 92%;
+  justify-content: center;
+}
+
+.color-row {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.color-row input[type="color"] {
+  width: 34px;
+  height: 26px;
+  padding: 0;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+}

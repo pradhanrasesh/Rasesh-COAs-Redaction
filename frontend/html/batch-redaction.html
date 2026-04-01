@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rasesh COAs PDF Redaction – Batch Redaction</title>
+
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="/vendor/lucide-offline.js" defer></script>
+  <script type="module" src="../app/layout.js"></script>
+</head>
+
+<body data-theme="system" data-density="comfortable" data-page="batch-redaction">
+  <div id="alertContainer"></div>
+  <div id="toastContainer" class="toast-container"></div>
+
+  <!-- STUDIO HEADER -->
+  <!-- ===========================
+       RASESH — STUDIO HEADER
+       Full HTML + CSS (self‑contained)
+  =========================== -->
+  <header id="base-header"></header>
+
+  <!-- LEFT SIDEBAR (standalone) -->
+   <!--<aside class="sidebar sidebar-static sidebar-studio">
+    <div class="sidebar-inner">
+      <div class="sidebar-header">
+        <div class="sidebar-logo">
+          <span class="logo-mark-animated">R</span>
+          <div class="logo-text">
+            <span class="logo-title">Rasesh COAs</span>
+            <span class="logo-subtitle">PDF Redaction</span>
+          </div>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <button class="nav-item" data-nav="home" data-tooltip="Home&#10;Tip: Landing page">
+          <i data-lucide="home" class="icon-20"></i>
+          <span class="nav-label">Home</span>
+        </button>
+
+        <button class="nav-item" data-nav="redaction" data-tooltip="Redaction&#10;Tip: Single PDF redaction&#10;Shortcut: T/B/H">
+          <i data-lucide="file-text" class="icon-20"></i>
+          <span class="nav-label">Redaction</span>
+        </button>
+
+        <button class="nav-item nav-item-active" data-nav="batch-redaction" data-tooltip="Batch Redaction&#10;Tip: Multi-PDF offline redaction">
+          <i data-lucide="layers" class="icon-20"></i>
+          <span class="nav-label">Batch Redaction</span>
+        </button>
+
+        <button class="nav-item" data-nav="ai-training" data-tooltip="AI Training&#10;Tip: Learn patterns locally from PDF pairs">
+          <i data-lucide="brain" class="icon-20"></i>
+          <span class="nav-label">AI Training</span>
+        </button>
+
+        <button class="nav-item" data-nav="settings" data-tooltip="Settings&#10;Tip: Theme, density, AI sensitivity">
+          <i data-lucide="settings" class="icon-20"></i>
+          <span class="nav-label">Settings</span>
+        </button>
+      </nav>
+    </div>
+  </aside>-->
+
+  <div class="app-root" style="padding: 24px;">
+    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 6px;">
+      <a
+        href="../index.html"
+        class="logo-circle"
+        style="text-decoration: none; display: flex;"
+        aria-label="Go to home"
+      >R</a>
+      <h1 style="margin: 0;">Batch Redaction</h1>
+    </div>
+
+    <p style="margin: 0 0 14px; opacity: 0.8;">
+      Select multiple PDFs and auto-apply redactions (offline). Output is returned as a ZIP.
+    </p>
+
+    <div style="display:flex; gap: 14px; flex-wrap: wrap;">
+      <div style="flex: 1 1 380px; min-width: 280px;">
+        <div style="font-weight:700; margin: 0 0 10px;">PDFs</div>
+        <div class="dropzone" id="batchDrop" style="cursor:pointer;">
+          <input id="batchInput" type="file" accept="application/pdf" multiple class="dropzone-input" />
+          <div class="dropzone-inner">
+            <i data-lucide="files" class="icon-20 dropzone-icon"></i>
+            <div class="dropzone-text-main">Drop PDFs here</div>
+            <div class="dropzone-text-sub">Multiple files allowed</div>
+            <div id="batchNames" class="dropzone-filename"></div>
+          </div>
+        </div>
+      </div>
+
+      <div style="flex: 0 1 320px; min-width: 260px;">
+        <div style="font-weight:700; margin: 0 0 10px;">Options</div>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <div class="setting-row">
+            <label style="display:flex; gap:10px; align-items:center; cursor:pointer;">
+              <input id="optAutoApply" type="checkbox" checked />
+              Auto-apply and save `<original>_Redacted.pdf`
+            </label>
+          </div>
+
+          <div class="setting-row">
+            <label style="display:flex; gap:10px; align-items:center; cursor:pointer;">
+              <input id="optScrubMeta" type="checkbox" checked />
+              Scrub PDF metadata
+            </label>
+          </div>
+
+          <div class="setting-row vertical">
+            <label style="display:block;">Use AI sensitivity</label>
+            <div style="display:flex; align-items:center; gap:12px;">
+              <input id="optSensitivity" type="range" min="0" max="100" step="1" style="flex:1;" />
+              <span id="optSensitivityValue" style="font-weight:700; min-width:44px; text-align:center;">50</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel-actions" style="margin-top: 18px; display:flex; gap: 10px; flex-wrap: wrap;">
+      <button id="btnBatchRedact" class="btn btn-primary" disabled>Batch redact</button>
+      <a class="btn btn-ghost" href="./redaction.html">
+        <i data-lucide="arrow-left"></i>
+        Back to Redaction
+      </a>
+    </div>
+
+    <div id="batchStatus" style="margin-top: 14px; min-height: 18px; opacity: 0.9;"></div>
+  </div>
+
+  <script>
+    // Sync theme + density from the same localStorage key used by the app.
+    document.addEventListener("DOMContentLoaded", () => {
+      try {
+        const raw = localStorage.getItem("coaSettings") || "{}";
+        const settings = JSON.parse(raw);
+        if (settings.theme) document.body.dataset.theme = settings.theme;
+        if (settings.density) document.body.dataset.density = settings.density;
+      } catch {
+        // Keep HTML defaults.
+      }
+    });
+  </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (window.lucide) window.lucide.createIcons();
+    });
+  </script>
+
+  <script>
+    // Standalone navigation for sidebar buttons on batch page.
+    document.addEventListener("DOMContentLoaded", () => {
+      document.querySelectorAll(".nav-item[data-nav]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const target = btn.dataset.nav;
+          if (target === "home") window.location.href = "../index.html";
+          else if (target === "redaction") window.location.href = "./redaction.html";
+          else if (target === "batch-redaction") window.location.href = "./batch-redaction.html";
+          else if (target === "ai-training") window.location.href = "./training.html";
+          else if (target === "settings") window.location.href = "./settings.html";
+        });
+      });
+    });
+  </script>
+
+  <script>
+    const BACKEND_URL = "";
+
+    const batchDrop = document.getElementById("batchDrop");
+    const batchInput = document.getElementById("batchInput");
+    const batchNames = document.getElementById("batchNames");
+
+    const optAutoApply = document.getElementById("optAutoApply");
+    const optScrubMeta = document.getElementById("optScrubMeta");
+    const optSensitivity = document.getElementById("optSensitivity");
+    const optSensitivityValue = document.getElementById("optSensitivityValue");
+
+    const btnBatch = document.getElementById("btnBatchRedact");
+    const batchStatus = document.getElementById("batchStatus");
+
+    function loadSensitivityFromSettings() {
+      try {
+        const raw = localStorage.getItem("coaSettings") || "{}";
+        const settings = JSON.parse(raw);
+        const v = parseInt(settings.aiSensitivity ?? 50, 10);
+        if (Number.isFinite(v)) {
+          optSensitivity.value = String(v);
+          optSensitivityValue.textContent = String(v);
+        }
+      } catch {
+        // ignore
+      }
+    }
+
+    function updateUI() {
+      const count = batchInput?.files?.length || 0;
+      btnBatch.disabled = count === 0;
+      if (batchNames) batchNames.textContent = count
+        ? `${count} file(s) selected`
+        : "";
+    }
+
+    batchDrop?.addEventListener("click", () => batchInput?.click());
+
+    batchInput?.addEventListener("change", updateUI);
+
+    optSensitivity?.addEventListener("input", () => {
+      optSensitivityValue.textContent = String(optSensitivity.value);
+    });
+
+    loadSensitivityFromSettings();
+    updateUI();
+
+    // Drag drop
+    batchDrop?.addEventListener("dragover", (e) => {
+      e.preventDefault();
+      batchDrop.classList.add("dragover");
+    });
+    batchDrop?.addEventListener("dragleave", () => {
+      batchDrop.classList.remove("dragover");
+    });
+    batchDrop?.addEventListener("drop", (e) => {
+      e.preventDefault();
+      batchDrop.classList.remove("dragover");
+      const f = e.dataTransfer.files;
+      if (!f || !f.length) return;
+      const dt = new DataTransfer();
+      for (let i = 0; i < f.length; i++) dt.items.add(f[i]);
+      batchInput.files = dt.files;
+      updateUI();
+    });
+
+    btnBatch?.addEventListener("click", async () => {
+      const files = batchInput.files;
+      if (!files || !files.length) return;
+
+      btnBatch.disabled = true;
+      batchStatus.textContent = "Processing batch…";
+
+      try {
+        const form = new FormData();
+        for (let i = 0; i < files.length; i++) {
+          const file = files[i];
+          form.append("files", file, file.name);
+        }
+        form.append("auto_apply", optAutoApply?.checked ? "true" : "false");
+        form.append("scrub_metadata", optScrubMeta?.checked ? "true" : "false");
+        form.append("sensitivity", String(optSensitivity?.value ?? "50"));
+
+        const res = await fetch(`${BACKEND_URL}/api/batch/redact`, {
+          method: "POST",
+          body: form
+        });
+
+        if (!res.ok) {
+          batchStatus.textContent = `Batch failed (${res.status}).`;
+          btnBatch.disabled = false;
+          return;
+        }
+
+        const blob = await res.blob();
+        const url = URL.createObjectURL(blob);
+
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "batch_redacted.zip";
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+
+        setTimeout(() => URL.revokeObjectURL(url), 2000);
+        batchStatus.textContent = "Batch complete. Download started.";
+      } catch (e) {
+        batchStatus.textContent = `Batch failed: ${e?.message || e}`;
+      } finally {
+        updateUI();
+      }
+    });
+  </script>
+</body>
+</html>
+

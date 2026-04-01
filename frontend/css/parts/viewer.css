@@ -1,0 +1,423 @@
+/* ------------------------------------------------------------
+   VIEWER PANEL (PDF.js container)
+   ------------------------------------------------------------ */
+
+.viewer-panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-subtle);
+  overflow: hidden;
+}
+
+/* Viewer Header */
+.viewer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 20px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border-subtle);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.zoom-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-subtle);
+  border-radius: 10px;
+  padding: 4px;
+}
+
+.zoom-controls .btn,
+.viewer-header .btn {
+  padding: 8px 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-weight: 600;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+}
+
+.zoom-controls .btn:hover,
+.viewer-header .btn:hover {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.zoom-controls .btn:active,
+.viewer-header .btn:active {
+  transform: translateY(0);
+}
+
+#zoomInfo {
+  font-weight: 700;
+  color: var(--text-primary);
+  min-width: 60px;
+  text-align: center;
+  font-size: 14px;
+}
+
+/* Page info */
+#pageInfo {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Editable page jump input */
+#pageJumpInput {
+  width: 64px;
+  text-align: center;
+  font-weight: 700;
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 4px 6px;
+  outline: none;
+}
+
+#pageJumpInput:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+#pageJumpInput::-webkit-outer-spin-button,
+#pageJumpInput::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+#pageJumpInput[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+#pageTotalText {
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+/* PDF Scroll Area */
+.pdf-scroll-container {
+  flex: 1;
+  overflow-y: auto;
+  background: var(--bg-main);
+  display: flex;
+  justify-content: flex-start; /* no centering gap */
+  padding: 20px;
+}
+
+/* PDF Column */
+.pdf-pages-column {
+  width: 100%;
+  max-width: 100%;
+  padding-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+/* Page Container */
+.page-container {
+  position: relative;
+  display: block;
+  width: 100%;      /* fill center column */
+  max-width: 100%;
+  height: auto;
+  margin: 0;   /* no horizontal auto-centering */
+  background: var(--surface);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1), 0 1px 8px rgba(0, 0, 0, 0.05);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+  transition: all 0.3s ease;
+}
+
+/* Dark mode adjustments */
+[data-theme="dark"] .page-container,
+[data-theme="system"] .page-container {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 1px 8px rgba(0, 0, 0, 0.2);
+  border-color: var(--border);
+}
+
+.page-container:hover {
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15), 0 3px 12px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+[data-theme="dark"] .page-container:hover,
+[data-theme="system"] .page-container:hover {
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4), 0 3px 12px rgba(0, 0, 0, 0.25);
+}
+
+/* PDF Layers */
+.pdf-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: #ffffff;
+  width: 100% !important;  /* stretch to full width */
+  height: auto !important;
+}
+
+.overlay-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 50;
+  pointer-events: auto;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.text-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: auto;
+  opacity: 1;
+  z-index: 20;
+  user-select: text;
+}
+
+.text-layer span {
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  user-select: text;
+}
+
+/* ------------------------------------------------------------
+   THUMBNAIL SIDEBAR (Stirling Style)
+   ------------------------------------------------------------ */
+.thumbnail-sidebar {
+  width: 240px;
+  background: var(--surface);
+  border-right: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: width 0.3s ease;
+}
+
+.thumbnail-sidebar.collapsed {
+  width: 0;
+  border-right: none;
+}
+
+.thumbnail-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.thumbnail-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.thumbnail-count {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: var(--bg-subtle);
+  padding: 2px 8px;
+  border-radius: 12px;
+}
+
+.thumbnail-container {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.thumbnail-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  color: var(--text-tertiary);
+  text-align: center;
+}
+
+.thumbnail-placeholder i {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 16px;
+  color: var(--text-tertiary);
+}
+
+.thumbnail-placeholder p {
+  font-size: 14px;
+  margin: 0;
+}
+
+.thumbnail-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  color: var(--text-tertiary);
+  text-align: center;
+}
+
+.thumbnail-loading i {
+  width: 32px;
+  height: 32px;
+  margin-bottom: 12px;
+  color: var(--text-tertiary);
+  animation: spin 1s linear infinite;
+}
+
+.thumbnail-loading p {
+  font-size: 14px;
+  margin: 0;
+}
+
+.thumbnail-item {
+  position: relative;
+  cursor: pointer;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 2px solid transparent;
+  transition: all 0.2s ease;
+  background: var(--bg-subtle);
+}
+
+.thumbnail-canvas-wrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
+}
+
+.thumbnail-page-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-align: center;
+  padding: 8px 4px;
+  background: var(--bg-subtle);
+  border-top: 1px solid var(--border-subtle);
+}
+
+.thumbnail-canvas {
+  width: 100%;
+  height: auto;
+  display: block;
+  background: white;
+}
+
+.thumbnail-canvas.placeholder {
+  background: var(--color-neutral-100);
+}
+
+.thumbnail-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  border-color: var(--accent);
+}
+
+.thumbnail-item.active {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+.thumbnail-canvas {
+  width: 100%;
+  height: auto;
+  display: block;
+  background: white;
+}
+
+.thumbnail-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.thumbnail-redaction-indicator {
+  position: absolute;
+  background: rgba(239, 68, 68, 0.6);
+  border: 1px solid rgba(239, 68, 68, 0.9);
+}
+
+.thumbnail-footer {
+  padding: 12px 16px;
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.thumbnail-controls {
+  padding: 12px;
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  justify-content: center;
+}
+
+/* Update workspace grid for thumbnail sidebar */
+.workspace {
+  display: grid;
+  grid-template-columns: 220px 240px 1fr 150px;
+  height: 100vh;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1400px) {
+  .workspace {
+    grid-template-columns: 220px 200px 1fr 150px;
+  }
+  .thumbnail-sidebar {
+    width: 200px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .workspace {
+    grid-template-columns: 70px 200px 1fr 70px;
+  }
+}
+
+@media (max-width: 992px) {
+  .workspace {
+    grid-template-columns: 70px 0 1fr 70px;
+  }
+  .thumbnail-sidebar {
+    display: none;
+  }
+}

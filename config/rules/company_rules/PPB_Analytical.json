@@ -1,0 +1,45 @@
+{
+  "company_id": "PPB_Analytical",
+  "display_name": "PPB Analytical Laboratories",
+
+  "detection": {
+    "match_strings": [
+      "PPB",
+      "PPB Analytical",
+      "PPB Laboratories"
+    ],
+    "priority": 9
+  },
+
+  "anchors": [
+    "PPB",
+    "Batch",
+    "Report Number"
+  ],
+
+  "regex": [
+    {
+      "id": "ppb_coa",
+      "pattern": "PPB[-\\s]?[0-9A-Z]{4,12}",
+      "action": "suggest"
+    }
+  ],
+
+  "layout": [
+    {
+      "id": "ppb_header",
+      "rect": { "x0": 0.0, "y0": 0.86, "x1": 1.0, "y1": 1.0 },
+      "relative": true,
+      "action": "suggest"
+    }
+  ],
+
+  "barcode_qr": [
+    {
+      "id": "ppb_qr",
+      "rect": { "x0": 0.92, "y0": 0.82, "x1": 0.98, "y1": 0.90 },
+      "relative": true,
+      "action": "suggest"
+    }
+  ]
+}

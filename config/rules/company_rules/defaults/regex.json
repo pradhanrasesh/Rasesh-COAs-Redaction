@@ -1,0 +1,25 @@
+{
+  "actual_regex": [
+    {
+      "id": "default_email",
+      "pattern": "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[A-Za-z]{2,}",
+      "label": "Email",
+      "action": "suggest",
+      "confidence": 0.95
+    },
+    {
+      "id": "default_phone",
+      "pattern": "(\\+?\\d[\\d\\s().-]{7,}\\d)",
+      "label": "Phone",
+      "action": "suggest",
+      "confidence": 0.90
+    },
+    {
+      "id": "default_sample_id",
+      "pattern": "(Sample\\s*ID|Lab\\s*Number)[:\\s]*[A-Za-z0-9\\-]+",
+      "label": "Sample ID",
+      "action": "suggest",
+      "confidence": 0.95
+    }
+  ]
+}

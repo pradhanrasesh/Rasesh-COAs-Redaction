@@ -1,0 +1,113 @@
+/* Import variables first so other files can use them */
+/* 1. Core Config */
+@import url('parts/variables.css');
+@import url('parts/layout.css');
+
+/* 2. Components (Buttons, Badges) */
+@import url('parts/components.css');
+@import url('parts/inputs.css');
+
+/* Layout parts */
+@import url('parts/header.css');
+@import url('parts/footer.css');
+
+/* 3. Regions/Sections */
+@import url('parts/sidebar.css');
+@import url('parts/topbar.css');
+@import url('parts/workspace.css');
+@import url('parts/viewer.css');
+
+/* Component parts */
+@import url('parts/buttons.css');
+
+/* fonts parts */
+@import url('parts/fonts.css');
+
+/* alerts parts */
+@import url('parts/alert.css');
+@import url('parts/suggestions.css');
+@import url('parts/search.css');
+@import url('parts/settings.css');
+@import url('parts/tools.css');
+@import url('parts/training-studio.css');
+@import url('parts/manual-training.css');
+@import url('parts/rule-define.css');
+@import url('parts/pdf-tools.css');
+
+/* ✅ NEW: responsive overrides */
+@import url('parts/responsive.css');
+
+/* Home landing (blue gradient + animated cards) */
+@import url('parts/landing.css');
+
+@import url('parts/plugin.css');
+
+/* PAGE CONTAINER (visual styling only) */
+.page-container {
+  margin: 20px auto;
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.7);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+/* ------------------------------------------------------------
+   GLOBAL SPACING + LAYOUT POLISH
+   ------------------------------------------------------------ */
+
+:root {
+  --gap-xs: 4px;
+  --gap-sm: 8px;
+  --gap-md: 12px;
+  --gap-lg: 18px;
+  --gap-xl: 24px;
+}
+
+:root {
+  --gap-xs: 4px;
+  --gap-sm: 8px;
+  --gap-md: 12px;
+  --gap-lg: 18px;
+  --gap-xl: 24px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.settings-page,
+.sidebar,
+.viewer-panel,
+.right-panel {
+  gap: var(--gap-md);
+}
+
+.setting-row.vertical {
+  gap: var(--gap-sm);
+}
+
+.settings-tabs {
+  margin-bottom: var(--gap-md);
+}
+
+/* ------------------------------------------------------------
+   THEME TRANSITION (LIGHT ↔ DARK)
+   ------------------------------------------------------------ */
+
+html,
+body,
+.app-root,
+.sidebar,
+.viewer-panel,
+.right-panel,
+.app-header {
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease;
+}

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rasesh COAs PDF Redaction</title>
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body data-theme="system" data-density="comfortable" data-page="home">
+
+  <div id="alertContainer"></div>
+  <div id="toastContainer" class="toast-container"></div>
+
+  <!-- HOME LANDING -->
+  <div id="homeLanding" class="home-landing">
+    <div class="home-landing-inner">
+
+      <!-- HERO -->
+      <div class="home-hero-copy">
+        <div class="home-hero-badge">
+          <i data-lucide="sparkles"></i>
+          <span class="home-subtle-anim">Rasesh COAs Redaction software</span>
+        </div>
+
+        <h1 class="home-title">
+          <span class="gradient">Redact, analyze, and secure</span> your documents with AI
+        </h1>
+
+        <p class="home-subtitle">
+          Everything stays in your browser. No data ever leaves your machine.
+        </p>
+      </div>
+
+      <!-- ROW 1: Redaction + Batch Redaction -->
+      <div class="home-hero-row">
+        <a class="home-card home-upload-card" href="html/redaction.html">
+          <div class="home-icon-line">
+            <div>
+              <h3 class="home-card-title">Redaction</h3>
+              <div class="home-card-text">Upload one COA and redact what matters.</div>
+            </div>
+            <i data-lucide="file-text"></i>
+          </div>
+        </a>
+
+        <a class="home-card home-feature-card" href="html/batch-redaction.html">
+          <div class="home-icon-line">
+            <div>
+              <h3 class="home-card-title">Batch Redaction</h3>
+              <div class="home-card-text">Process multiple PDFs with one workflow.</div>
+            </div>
+            <i data-lucide="copy"></i>
+          </div>
+        </a>
+      </div>
+
+      <!-- ROW 2: AI Training + Settings -->
+      <div class="home-hero-row">
+        <a class="home-card home-feature-card" href="html/training.html">
+          <div class="home-icon-line">
+            <div>
+              <h3 class="home-card-title">AI Training</h3>
+              <div class="home-card-text">Improve detection accuracy over time.</div>
+            </div>
+            <i data-lucide="brain"></i>
+          </div>
+        </a>
+
+        <a class="home-card home-feature-card" href="html/settings.html">
+          <div class="home-icon-line">
+            <div>
+              <h3 class="home-card-title">Settings</h3>
+              <div class="home-card-text">Theme, density, and preferences.</div>
+            </div>
+            <i data-lucide="settings"></i>
+          </div>
+        </a>
+      </div>
+
+      <!-- ⭐ NEW ROW 3: Rule Define + PDF Toolbox (same row, same size) -->
+      <div class="home-hero-row">
+
+        <!-- Rule Define (same width as Batch Redaction) -->
+        <a class="home-card home-feature-card" href="html/rule-define.html">
+          <div class="home-icon-line">
+            <div>
+              <h3 class="home-card-title">Rule Define</h3>
+              <div class="home-card-text">
+                Upload one PDF and manually define company rules on the preview.
+              </div>
+            </div>
+            <i data-lucide="scan-search"></i>
+          </div>
+        </a>
+
+        <!-- PDF Toolbox (same width as Redaction) -->
+        <a class="home-card home-upload-card" href="html/pdf-tools.html">
+          <div class="home-icon-line">
+            <div>
+              <h3 class="home-card-title">PDF Toolbox</h3>
+              <div class="home-card-text">
+                Document review, security, verification, formatting, extraction, removal,
+                automation, general editing, advanced formatting, and developer tools in one studio-style toolbox.
+              </div>
+            </div>
+            <i data-lucide="layout-grid"></i>
+          </div>
+        </a>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Lucide Icons -->
+  <script src="/vendor/lucide-offline.js"></script>
+
+  <script>
+    // Sync theme + density from localStorage
+    document.addEventListener("DOMContentLoaded", () => {
+      try {
+        const raw = localStorage.getItem("coaSettings") || "{}";
+        const settings = JSON.parse(raw);
+        if (settings.theme) document.body.dataset.theme = settings.theme;
+        if (settings.density) document.body.dataset.density = settings.density;
+      } catch {}
+    });
+  </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (window.lucide) window.lucide.createIcons();
+    });
+  </script>
+
+</body>
+</html>
